@@ -1,0 +1,12 @@
+{
+    "files.eol": "\n",
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": true
+    },  
+    "cSpell.words": [
+        "codeex",
+        "INITDB",
+        "nestjs"
+    ]
+}

@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+  nginx:
+    build: ./nginx
+    container_name: nginx
+    restart: always
+    ports:
+      - 8080:80
+    depends_on:
+      - app
+      
+  db:
+    image: mongo
+    container_name: db
+    restart: on-failure
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
+    ports:
+      - 27017:27017
+    volumes:
+      - db_data:/data/db
+
+  cache:
+    image: redis
+    container_name: cache
+    restart: unless-stopped
+    ports:
+      - 6379:6379
+    volumes:
+      - db_cache:/data
+
+  app:
+    build: ./api
+    container_name: app
+    restart: always
+    volumes:
+      - ./api:/home/app/
+      - /home/app/node_modules/
+    ports:
+      - 3001:3001
+    env_file:
+      - ./.env
+    depends_on:
+      - db
+      - cache
+
+volumes:
+  db_data:
+  db_cache:
+
+networks:
+  proxy-server:
