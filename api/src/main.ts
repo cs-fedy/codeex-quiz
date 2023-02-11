@@ -1,5 +1,5 @@
 import { NestFactory } from '@nestjs/core'
-import { AppModule } from './app.module'
+import { AppModule } from './modules/app.module'
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule)
@@ -7,4 +7,8 @@ async function bootstrap() {
   app.enableCors()
   await app.listen(process.env.PORT)
 }
+
 bootstrap()
+// work on auth
+// work on user account management
+// work on admin stuff

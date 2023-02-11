@@ -1,18 +1,18 @@
-version: '3.8'
+version: "3.8"
 
 services:
-  nginx:
+  codeex-nginx:
     build: ./nginx
-    container_name: nginx
+    container_name: codeex-nginx
     restart: always
     ports:
       - 8080:80
     depends_on:
-      - app
-      
-  db:
+      - codeex-app
+
+  codeex-db:
     image: mongo
-    container_name: db
+    container_name: codeex-db
     restart: on-failure
     environment:
       MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
@@ -20,20 +20,20 @@ services:
     ports:
       - 27017:27017
     volumes:
-      - db_data:/data/db
+      - codeex-db_data:/data/db
 
-  cache:
+  codeex-cache:
     image: redis
-    container_name: cache
+    container_name: codeex-cache
     restart: unless-stopped
     ports:
       - 6379:6379
     volumes:
-      - db_cache:/data
+      - codeex-db_cache:/data
 
-  app:
+  codeex-app:
     build: ./api
-    container_name: app
+    container_name: codeex-app
     restart: always
     volumes:
       - ./api:/home/app/
@@ -43,12 +43,9 @@ services:
     env_file:
       - ./.env
     depends_on:
-      - db
-      - cache
+      - codeex-db
+      - codeex-cache
 
 volumes:
-  db_data:
-  db_cache:
-
-networks:
-  proxy-server:
+  codeex-db_data:
+  codeex-db_cache:
