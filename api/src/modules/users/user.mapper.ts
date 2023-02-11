@@ -4,10 +4,10 @@ import User from './user.domain'
 import UserDTO from './user.dto'
 
 @Injectable()
-export default class UserMapper implements IMapper<User> {
+export default class UserMapper implements IMapper<User, UserDTO> {
   toDomain(raw: any): User {
     return new User(
-      raw.id,
+      raw._id,
       raw.email,
       raw.password,
       raw.fullName,
@@ -29,7 +29,7 @@ export default class UserMapper implements IMapper<User> {
     }
   }
 
-  toDTO(domain: User): UserDTO {
+  toDTO(domain: User) {
     return new UserDTO(
       domain.userId,
       domain.email,
