@@ -4,5 +4,15 @@
   "editor.codeActionsOnSave": {
     "source.organizeImports": true
   },
-  "cSpell.words": ["codeex", "INITDB", "nestjs", "sendgrid"]
+  "cSpell.words": [
+    "codeex",
+    "INITDB",
+    "lpos",
+    "lpush",
+    "lrem",
+    "nestjs",
+    "sendgrid",
+    "setex",
+    "STROOOOOOOOOOOOOOOONG"
+  ]
 }
