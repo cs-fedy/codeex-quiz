@@ -5,9 +5,7 @@ import RegisterArgs from './validators/register'
 
 @Controller('auth')
 export default class AuthController {
-  constructor(
-    @Inject(Services.userService) private userService: IUserService,
-  ) {}
+  constructor(@Inject(Services.userService) private userService: IUserService) {}
 
   @Post('register')
   async register(@Body() registerArgs: RegisterArgs) {

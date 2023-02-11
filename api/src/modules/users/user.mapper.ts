@@ -17,7 +17,7 @@ export default class UserMapper implements IMapper<User, UserDTO> {
     )
   }
 
-  toPersistence(domain: User) {
+  toPersistence(domain: User): any {
     return {
       id: domain.userId,
       email: domain.email,
@@ -29,7 +29,7 @@ export default class UserMapper implements IMapper<User, UserDTO> {
     }
   }
 
-  toDTO(domain: User) {
+  toDTO(domain: User): UserDTO {
     return new UserDTO(
       domain.userId,
       domain.email,

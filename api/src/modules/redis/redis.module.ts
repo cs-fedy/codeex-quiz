@@ -1,9 +1,4 @@
-import {
-  DynamicModule,
-  FactoryProvider,
-  Module,
-  ModuleMetadata,
-} from '@nestjs/common'
+import { DynamicModule, FactoryProvider, Module, ModuleMetadata } from '@nestjs/common'
 import IORedis, { Redis, RedisOptions } from 'ioredis'
 
 export const IORedisKey = 'IORedis'
@@ -14,9 +9,7 @@ type RedisModuleOptions = {
 }
 
 type RedisAsyncModuleOptions = {
-  useFactory: (
-    ...args: Array<any>
-  ) => Promise<RedisModuleOptions> | RedisModuleOptions
+  useFactory: (...args: Array<any>) => Promise<RedisModuleOptions> | RedisModuleOptions
 } & Pick<ModuleMetadata, 'imports'> &
   Pick<FactoryProvider, 'inject'>
 

@@ -3,10 +3,12 @@ declare namespace NodeJS {
     ENV: 'development' | 'production' | 'test'
     PORT: number
     MONGODB_URL: string
+    JWT_SECRET: string
     REDIS_PORT: number
     REDIS_HOST: string
     CLIENT_URL: string
-    SENDGRID_KEY: string
-    FROM_EMAIL: string
+    BASE_URL: string
+    JWT_ACCESS_EXPIRATION_MINUTES: number
+    JWT_REFRESH_EXPIRATION_DAYS: number
   }
 }
