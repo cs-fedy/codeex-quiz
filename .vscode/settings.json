@@ -10,6 +10,7 @@
     "lpos",
     "lpush",
     "lrem",
+    "middlewares",
     "nestjs",
     "sendgrid",
     "setex",
