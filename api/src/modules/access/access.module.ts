@@ -11,8 +11,11 @@ const jwt = JwtModule.register({})
   imports: [jwt, redisModule],
   providers: [
     { provide: Services.access, useClass: AccessService },
-    { provide: Repositories.whiteListRepository, useClass: WhiteListRepo },
+    { provide: Repositories.whiteList, useClass: WhiteListRepo },
   ],
-  exports: [{ provide: Services.access, useClass: AccessService }],
+  exports: [
+    { provide: Services.access, useClass: AccessService },
+    { provide: Repositories.whiteList, useClass: WhiteListRepo },
+  ],
 })
 export default class AccessModule {}

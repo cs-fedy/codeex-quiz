@@ -12,14 +12,14 @@ const userModel = MongooseModule.forFeature([{ schema: UserSchema, name: Models.
 @Module({
   imports: [userModel],
   providers: [
-    { provide: Mappers.userMapper, useClass: UserMapper },
-    { provide: Repositories.userRepository, useClass: UserRepo },
-    { provide: Services.userService, useClass: UserService },
+    { provide: Mappers.user, useClass: UserMapper },
+    { provide: Repositories.user, useClass: UserRepo },
+    { provide: Services.user, useClass: UserService },
     { provide: Services.hash, useClass: Hash },
   ],
   exports: [
-    { provide: Services.userService, useClass: UserService },
-    { provide: Repositories.userRepository, useClass: UserRepo },
+    { provide: Services.user, useClass: UserService },
+    { provide: Repositories.user, useClass: UserRepo },
   ],
 })
 export default class UsersModule {}

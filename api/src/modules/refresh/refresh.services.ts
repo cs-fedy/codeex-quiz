@@ -1,5 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common'
-import moment from 'moment'
+import * as crypto from 'crypto'
+import * as moment from 'moment'
 import IMapper from 'src/common/mapper'
 import { Mappers, Repositories } from 'src/utils/constants'
 import IRefreshRepo from './IRefresh.repository'
@@ -10,8 +11,8 @@ import RefreshDTO from './refresh.dto'
 @Injectable()
 export default class RefreshService implements IRefreshService {
   constructor(
-    @Inject(Repositories.refreshRepository) private refreshRepo: IRefreshRepo,
-    @Inject(Mappers.refreshMapper)
+    @Inject(Repositories.refresh) private refreshRepo: IRefreshRepo,
+    @Inject(Mappers.refresh)
     private refreshMapper: IMapper<Refresh, RefreshDTO>,
   ) {}
 

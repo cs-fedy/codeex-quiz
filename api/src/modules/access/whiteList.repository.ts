@@ -21,7 +21,7 @@ export default class WhiteListRepo implements IWhiteListRepo {
   async exists(userId: string, token: string): Promise<boolean> {
     const key = this.getKey(userId)
     const existingTokenPosition = await this.redisClient.lpos(key, token)
-    return !!existingTokenPosition
+    return existingTokenPosition !== null
   }
 
   private getKey(userId: string): string {

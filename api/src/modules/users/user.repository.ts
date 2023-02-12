@@ -12,7 +12,7 @@ import { UserDocument } from './user.model'
 export default class UserRepo implements IUserRepo {
   constructor(
     @InjectModel(Models.user) private userModel: Model<UserDocument>,
-    @Inject(Mappers.userMapper) private userMapper: IMapper<User, UserDTO>,
+    @Inject(Mappers.user) private userMapper: IMapper<User, UserDTO>,
   ) {}
 
   async createUser(user: User): Promise<User> {

@@ -18,7 +18,7 @@ class Refresh {
     ref: Models.user,
     required: true,
   })
-  roles: User
+  owner: User
 }
 
 export const RefreshSchema = SchemaFactory.createForClass(Refresh)

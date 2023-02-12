@@ -4,26 +4,35 @@ export enum Models {
 }
 
 export enum Mappers {
-  userMapper = 'userMapper',
-  refreshMapper = 'refreshMapper',
+  user = 'userMapper',
+  refresh = 'refreshMapper',
 }
 
 export enum Repositories {
-  userRepository = 'userRepository',
-  refreshRepository = 'refreshRepository',
-  whiteListRepository = 'whiteListRepository',
+  user = 'userRepository',
+  refresh = 'refreshRepository',
+  whiteList = 'whiteListRepository',
 }
 
 export enum Services {
-  userService = 'userService',
-  access = 'access',
-  hash = 'hash',
-  refresh = 'refresh',
+  user = 'userService',
+  access = 'accessService',
+  hash = 'hashService',
+  refresh = 'refreshService',
+  auth = 'authService',
 }
 
 export enum Roles {
   user = 'user',
   admin = 'admin',
+}
+
+export enum Routes {
+  auth = 'auth',
+  register = 'register',
+  login = 'login',
+  refresh = 'refresh',
+  logout = 'logout',
 }
 
 export const defaultAvatar = 'https://opus-platform-s3.s3.eu-central-1.amazonaws.com/DSC_0221.jpg'

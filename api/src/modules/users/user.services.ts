@@ -12,8 +12,8 @@ import UserDTO from './user.dto'
 @Injectable()
 export default class UserService implements IUserService {
   constructor(
-    @Inject(Repositories.userRepository) private userRepository: IUserRepo,
-    @Inject(Mappers.userMapper) private userMapper: IMapper<User, UserDTO>,
+    @Inject(Repositories.user) private userRepository: IUserRepo,
+    @Inject(Mappers.user) private userMapper: IMapper<User, UserDTO>,
     @Inject(Services.hash) private hashService: IHash,
   ) {}
 

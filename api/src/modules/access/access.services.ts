@@ -1,6 +1,6 @@
 import { HttpStatus, Inject, Injectable } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
-import moment from 'moment'
+import * as moment from 'moment'
 import { Repositories } from 'src/utils/constants'
 import { Left, Right } from 'src/utils/either'
 import IAccessService, { VerifyTokenResult } from './IAccess.services'
@@ -11,7 +11,7 @@ import AccessDTO from './access.dto'
 export class AccessService implements IAccessService {
   constructor(
     private jwtService: JwtService,
-    @Inject(Repositories.whiteListRepository) private whiteListRepository: IWhiteListRepo,
+    @Inject(Repositories.whiteList) private whiteListRepository: IWhiteListRepo,
   ) {}
 
   async generateToken(payload: any): Promise<AccessDTO> {
@@ -26,10 +26,22 @@ export class AccessService implements IAccessService {
     return new AccessDTO(token, expiresIn)
   }
 
-  verifyToken<U extends object>(token: string): VerifyTokenResult<U> {
+  async verifyToken<U extends { userId: string }>(
+    authorizationHeader: string,
+  ): Promise<VerifyTokenResult<U>> {
+    const token = authorizationHeader.split(' ')[1]
+    if (!token)
+      return Left.create({
+        status: HttpStatus.BAD_REQUEST,
+        code: 'invalid_token',
+        message: 'authorization token must be: Bearer [token]',
+      })
+
+    let payload: U
+
     try {
-      const payload = this.jwtService.verify<U>(token)
-      return Right.create(payload)
+      const options = { secret: process.env.JWT_SECRET }
+      payload = this.jwtService.verify<U>(token, options)
     } catch (error) {
       return Left.create({
         status: HttpStatus.BAD_REQUEST,
@@ -37,5 +49,14 @@ export class AccessService implements IAccessService {
         message: 'invalid/expired token',
       })
     }
+
+    const isWhiteListed = await this.whiteListRepository.exists(payload.userId, token)
+    if (!isWhiteListed)
+      return Left.create({
+        status: HttpStatus.BAD_REQUEST,
+        code: 'invalid_token',
+        message: 'invalid/expired token',
+      })
+    return Right.create(payload)
   }
 }

@@ -12,5 +12,7 @@ export type VerifyTokenResult<T> = Either<InvalidExpiredToken, T>
 
 export default interface IAccessService {
   generateToken(payload: any): Promise<AccessDTO>
-  verifyToken<U extends object>(token: string): VerifyTokenResult<U>
+  verifyToken<U extends { userId: string }>(
+    authorizationHeader: string,
+  ): Promise<VerifyTokenResult<U>>
 }
