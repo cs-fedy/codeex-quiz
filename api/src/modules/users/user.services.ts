@@ -5,7 +5,7 @@ import { Mappers, Repositories, Roles, Services, defaultAvatar } from 'src/utils
 import { Left, Right } from 'src/utils/either'
 import generateId from 'src/utils/generateId'
 import IUserRepo from './IUser.repository'
-import IUserService, { CreateUserArgs, CreateUserResult } from './IUser.services'
+import IUserService, { CreateUserArgs, CreateUserResult, GetUserResult } from './IUser.services'
 import User from './user.domain'
 import UserDTO from './user.dto'
 
@@ -44,5 +44,18 @@ export default class UserService implements IUserService {
       avatarURL: defaultAvatar,
       roles: [Roles.user],
     }
+  }
+
+  async getUser(userId: string): Promise<GetUserResult> {
+    const existingUser = await this.userRepository.getUserById(userId)
+    if (!existingUser)
+      return Left.create({
+        code: 'user_not_found',
+        status: HttpStatus.NOT_FOUND,
+        message: 'user not found',
+      })
+
+    const fetchedUser = this.userMapper.toDTO(existingUser)
+    return Right.create(fetchedUser)
   }
 }

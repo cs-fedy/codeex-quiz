@@ -1,5 +1,6 @@
 import { HttpStatus } from '@nestjs/common'
 import Either from 'src/utils/either'
+import { UserNotFound } from 'src/utils/types'
 import AccessDTO from '../access/access.dto'
 import RefreshDTO from '../refresh/refresh.dto'
 
@@ -28,12 +29,6 @@ export type RefreshArgs = {
 export type InvalidRefreshToken = {
   status: HttpStatus.BAD_REQUEST
   code: 'invalid_refresh_token'
-  message: string
-}
-
-export type UserNotFound = {
-  status: HttpStatus.NOT_FOUND
-  code: 'user_not_found'
   message: string
 }
 

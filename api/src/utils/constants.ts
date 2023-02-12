@@ -33,6 +33,8 @@ export enum Routes {
   login = 'login',
   refresh = 'refresh',
   logout = 'logout',
+  users = 'users',
+  logged = 'logged',
 }
 
 export const defaultAvatar = 'https://opus-platform-s3.s3.eu-central-1.amazonaws.com/DSC_0221.jpg'
