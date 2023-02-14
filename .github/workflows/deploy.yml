@@ -14,14 +14,14 @@ jobs:
       - name: Set up SSH
         uses: webfactory/ssh-agent@v0.5.0
         with:
-          ssh-private-key: ${{ vars.AWS_PRIVATE_KEY }}
+          ssh-private-key: ${{ secrets.AWS_PRIVATE_KEY }}
 
       - name: Connect to EC2 instance
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ vars.EC2_HOST }}
-          username: ${{ vars.EC2_USER }}
-          key: ${{ vars.AWS_PRIVATE_KEY }}
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.AWS_PRIVATE_KEY }}
           script: |
             if [ ! -d codeex-quiz ]; then
               mkdir codeex-quiz
@@ -37,9 +37,9 @@ jobs:
       - name: Start docker-compose
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ vars.EC2_HOST }}
-          username: ${{ vars.EC2_USER }}
-          key: ${{ vars.AWS_PRIVATE_KEY }}
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.AWS_PRIVATE_KEY }}
           script: |
             cd /path/to/project
             sudo docker-compose up -d
