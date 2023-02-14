@@ -16,7 +16,7 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.AWS_PRIVATE_KEY }}
 
-      - name: Connect to EC2 instance
+      - name: Connect to EC2 instance and clone project
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.EC2_HOST }}
@@ -41,5 +41,5 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.AWS_PRIVATE_KEY }}
           script: |
-            cd /path/to/project
-            sudo docker-compose up -d
+            cd codeex-quiz/codeex-quiz-server
+            sudo docker-compose up -d --build
