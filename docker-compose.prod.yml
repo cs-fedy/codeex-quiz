@@ -1,15 +1,6 @@
 version: "3.8"
 
 services:
-  codeex-nginx:
-    build: ./nginx
-    container_name: codeex-nginx
-    restart: always
-    ports:
-      - 8080:80
-    depends_on:
-      - codeex-app
-
   codeex-db:
     image: mongo
     container_name: codeex-db
@@ -31,17 +22,31 @@ services:
     volumes:
       - codeex-db_cache:/data
 
+  codeex-nginx:
+    build: ./nginx
+    container_name: codeex-nginx
+    restart: always
+    ports:
+      - 8080:80
+    depends_on:
+      - codeex-app
+
   codeex-app:
-    build: ./api
     container_name: codeex-app
     restart: always
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+      target: production
+    environment:
+      - NODE_ENV=production
+    env_file:
+      - ./.env
     volumes:
       - ./api:/home/app/
       - /home/app/node_modules/
     ports:
       - 3001:3001
-    env_file:
-      - ./.env
     depends_on:
       - codeex-db
       - codeex-cache

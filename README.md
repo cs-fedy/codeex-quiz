@@ -9,7 +9,7 @@ codeex quiz platform backend system using `Node.js`, `Nest.js`, `TypeScript` and
 1. Clone the repo `git clone https://github.com/cs-fedy/codeex-quiz.git`
 2. Change your current directory to the repo dir: `cd codeex-quiz`
 3. make a `.env` file having the `key=value` pairs shown below.
-4. Run `docker compose up -d` to start the db.
+4. Run `sudo docker compose -f docker-compose.prod.yml up -d` to start the db.
 5. If not working with node as a container then install yarn: `np i -g yarn`
 6. Install all the dependencies: `yarn install` - accessible in the `api` directory
 7. Run the system in a dev env: `yarn run dev` - accessible in the `api` directory
