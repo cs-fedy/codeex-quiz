@@ -56,6 +56,12 @@ export default class AuthController {
   @Post(Routes.refresh)
   async refresh(@Req() req: Request, @Res() res: Response) {
     const refreshToken = req.cookies[refreshKey]
+    if (!refreshToken)
+      throw new HttpException(
+        { code: 'invalid_input', payload: { refreshToken: 'refresh token is required' } },
+        HttpStatus.BAD_REQUEST,
+      )
+
     const loggedUser = await this.authService.refresh({ refreshToken: refreshToken })
     if (loggedUser.isLeft()) {
       const { code, status, message } = loggedUser.error
