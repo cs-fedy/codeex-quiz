@@ -1,13 +1,13 @@
 import { HttpStatus } from '@nestjs/common'
 import Either from 'src/utils/either'
 import { UserNotFound } from 'src/utils/types'
-import UserDTO from './user.dto'
+import UserDTO from './users.dto'
 
 export type CreateUserArgs = {
   email: string
+  username: string
   password: string
   fullName: string
-  username: string
 }
 
 type UserAlreadyExist = {

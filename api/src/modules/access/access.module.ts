@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common'
 import { JwtModule } from '@nestjs/jwt'
-import { Repositories, Services } from 'src/utils/constants'
+import { Repos, Services } from 'src/utils/constants'
+import CacheModule from '../cache/cache.module'
 import { redisModule } from '../redis/module.config'
 import { AccessService } from './access.services'
 import WhiteListRepo from './whiteList.repository'
@@ -8,14 +9,14 @@ import WhiteListRepo from './whiteList.repository'
 const jwt = JwtModule.register({})
 
 @Module({
-  imports: [jwt, redisModule],
+  imports: [jwt, redisModule, CacheModule],
   providers: [
     { provide: Services.access, useClass: AccessService },
-    { provide: Repositories.whiteList, useClass: WhiteListRepo },
+    { provide: Repos.whiteList, useClass: WhiteListRepo },
   ],
   exports: [
     { provide: Services.access, useClass: AccessService },
-    { provide: Repositories.whiteList, useClass: WhiteListRepo },
+    { provide: Repos.whiteList, useClass: WhiteListRepo },
   ],
 })
 export default class AccessModule {}

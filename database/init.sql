@@ -1,0 +1,1 @@
+CREATE DATABASE codeex_quiz;

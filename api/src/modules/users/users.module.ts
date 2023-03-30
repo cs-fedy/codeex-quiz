@@ -1,35 +1,40 @@
+import { BullModule } from '@nestjs/bull'
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common'
-import { JwtModule } from '@nestjs/jwt'
-import { MongooseModule } from '@nestjs/mongoose'
-import { JwtMiddleware } from 'src/middlewares/jwt'
+import { JwtMiddleware } from 'src/middleware/jwt'
+import { LoggedMiddleware } from 'src/middleware/logged'
 import { Hash } from 'src/services/hashing'
-import { Mappers, Models, Repositories, Services } from 'src/utils/constants'
+import { Events, Mappers, Queues, Repos, Services } from 'src/utils/constants'
 import AccessModule from '../access/access.module'
-import UsersController from './user.controllers'
-import UserMapper from './user.mapper'
-import { UserSchema } from './user.model'
-import UserRepo from './user.repository'
-import UserService from './user.services'
+import CacheModule from '../cache/cache.module'
+import MailModule from '../mail/mail.module'
+import UsersController from './users.controllers'
+import UserEvents from './users.events'
+import { UserConsumer } from './users.jobs'
+import UsersMapper from './users.mapper'
+import UsersRepo from './users.repository'
+import UserService from './users.services'
 
-const userModel = MongooseModule.forFeature([{ schema: UserSchema, name: Models.user }])
-const jwt = JwtModule.register({ secret: process.env.JWT_SECRET })
+const userQueue = BullModule.registerQueue({ name: Queues.users })
 
 @Module({
-  imports: [userModel, jwt, AccessModule],
   controllers: [UsersController],
+  imports: [userQueue, AccessModule, MailModule, CacheModule],
   providers: [
-    { provide: Mappers.user, useClass: UserMapper },
-    { provide: Repositories.user, useClass: UserRepo },
-    { provide: Services.user, useClass: UserService },
+    { provide: Mappers.user, useClass: UsersMapper },
+    { provide: Repos.user, useClass: UsersRepo },
     { provide: Services.hash, useClass: Hash },
+    { provide: Services.user, useClass: UserService },
+    { provide: Queues.users, useClass: UserConsumer },
+    { provide: Events.user, useClass: UserEvents },
   ],
   exports: [
+    { provide: Repos.user, useClass: UsersRepo },
+    { provide: Mappers.user, useClass: UsersMapper },
     { provide: Services.user, useClass: UserService },
-    { provide: Repositories.user, useClass: UserRepo },
   ],
 })
 export default class UsersModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(JwtMiddleware).forRoutes(UsersController)
+    consumer.apply(JwtMiddleware, LoggedMiddleware).forRoutes(UsersController)
   }
 }

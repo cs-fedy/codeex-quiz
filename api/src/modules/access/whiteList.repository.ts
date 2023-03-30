@@ -1,27 +1,31 @@
 import { Inject, Injectable } from '@nestjs/common'
-import { Redis } from 'ioredis'
-import { accessKey } from 'src/utils/constants'
-import { IORedisKey } from '../redis/redis.module'
+import { Repos, accessKey } from 'src/utils/constants'
+import ICacheRepo from '../cache/ICache.repository'
 import IWhiteListRepo from './IWhiteList.repository'
 
 @Injectable()
 export default class WhiteListRepo implements IWhiteListRepo {
-  constructor(@Inject(IORedisKey) private readonly redisClient: Redis) {}
+  constructor(@Inject(Repos.cache) private whiteListCache: ICacheRepo<string>) {}
 
   async add(userId: string, token: string): Promise<void> {
     const key = this.getKey(userId)
-    await this.redisClient.lpush(key, token)
+    await this.whiteListCache.push(key, token)
   }
 
   async remove(userId: string, token: string): Promise<void> {
     const key = this.getKey(userId)
-    await this.redisClient.lrem(key, 1, token)
+    await this.whiteListCache.remove(key, token)
   }
 
   async exists(userId: string, token: string): Promise<boolean> {
     const key = this.getKey(userId)
-    const existingTokenPosition = await this.redisClient.lpos(key, token)
-    return existingTokenPosition !== null
+    const tokenIndex = await this.whiteListCache.search(key, token)
+    return tokenIndex > -1
+  }
+
+  async clear(userId: string): Promise<void> {
+    const key = this.getKey(userId)
+    await this.whiteListCache.clear(key)
   }
 
   private getKey(userId: string): string {

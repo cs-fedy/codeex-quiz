@@ -1,9 +1,9 @@
 import { HttpStatus, Inject, Injectable } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
 import * as moment from 'moment'
-import { Repositories } from 'src/utils/constants'
+import { Repos } from 'src/utils/constants'
 import { Left, Right } from 'src/utils/either'
-import IAccessService, { VerifyTokenResult } from './IAccess.services'
+import IAccessService, { BaseToken, VerifyTokenResult } from './IAccess.services'
 import IWhiteListRepo from './IWhiteList.repository'
 import AccessDTO from './access.dto'
 
@@ -11,10 +11,10 @@ import AccessDTO from './access.dto'
 export class AccessService implements IAccessService {
   constructor(
     private jwtService: JwtService,
-    @Inject(Repositories.whiteList) private whiteListRepository: IWhiteListRepo,
+    @Inject(Repos.whiteList) private whiteListRepository: IWhiteListRepo,
   ) {}
 
-  async generateToken(payload: any): Promise<AccessDTO> {
+  async generateToken<T extends BaseToken>(payload: T): Promise<AccessDTO> {
     const token = this.jwtService.sign(payload, {
       secret: process.env.JWT_SECRET,
       expiresIn: `${process.env.JWT_ACCESS_EXPIRATION_MINUTES}m`,
@@ -26,17 +26,18 @@ export class AccessService implements IAccessService {
     return new AccessDTO(token, expiresIn)
   }
 
-  async verifyToken<U extends { userId: string }>(
+  async verifyToken<U extends BaseToken>(
     authorizationHeader: string,
   ): Promise<VerifyTokenResult<U>> {
-    const token = authorizationHeader.split(' ')[1]
-    if (!token)
+    const tokenParts = authorizationHeader.split(' ')
+    if (tokenParts.length !== 2)
       return Left.create({
         status: HttpStatus.BAD_REQUEST,
         code: 'invalid_token',
         message: 'authorization token must be: Bearer [token]',
       })
 
+    const [_, token] = tokenParts
     let payload: U
 
     try {

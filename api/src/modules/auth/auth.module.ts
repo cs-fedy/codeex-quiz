@@ -1,5 +1,5 @@
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common'
-import { JwtMiddleware } from 'src/middlewares/jwt'
+import { JwtMiddleware } from 'src/middleware/jwt'
 import { Hash } from 'src/services/hashing'
 import { Services } from 'src/utils/constants'
 import AccessModule from '../access/access.module'

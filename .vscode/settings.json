@@ -7,11 +7,12 @@
   "cSpell.words": [
     "appleboy",
     "codeex",
+    "iaccount",
     "INITDB",
     "lpos",
     "lpush",
+    "lrange",
     "lrem",
-    "middlewares",
     "nestjs",
     "sendgrid",
     "setex",
