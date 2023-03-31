@@ -4,10 +4,17 @@ import { Mappers, Repos } from 'src/utils/constants'
 import { Left, Right } from 'src/utils/either'
 import ICollectionRepo from '../collections/i-collections.repository'
 import IQuizRepo from '../quizzes/i-quizzes.repository'
+import Quiz from '../quizzes/quizzes.domain'
+import QuizDTO from '../quizzes/quizzes.dto'
 import CollectionQuiz from './collection-quizzes.domain'
 import CollectionQuizDTO from './collection-quizzes.dto'
 import ICollectionQuizRepo from './i-collection-quizzes.repository'
-import ICollectionQuizService, { AddQuizArgs, AddQuizResult } from './i-collection-quizzes.services'
+import ICollectionQuizService, {
+  AddQuizArgs,
+  AddQuizResult,
+  ListCollectionQuizzesArgs,
+  ListCollectionQuizzesResult,
+} from './i-collection-quizzes.services'
 
 @Injectable()
 export default class CollectionQuizService implements ICollectionQuizService {
@@ -18,6 +25,7 @@ export default class CollectionQuizService implements ICollectionQuizService {
     private collectionQuizRepo: ICollectionQuizRepo,
     @Inject(Mappers.collectionQuiz)
     private collectionQuizMapper: IMapper<CollectionQuiz, CollectionQuizDTO>,
+    private quizMapper: IMapper<Quiz, QuizDTO>,
   ) {}
 
   async addQuiz(args: AddQuizArgs): Promise<AddQuizResult> {
@@ -63,5 +71,33 @@ export default class CollectionQuizService implements ICollectionQuizService {
     const createdCollectionQuiz = await this.collectionQuizRepo.saveCollectionQuiz(args)
     const mappedCollectionQuiz = this.collectionQuizMapper.toDTO(createdCollectionQuiz)
     return Right.create(mappedCollectionQuiz)
+  }
+
+  async listCollectionQuizzes(
+    args: ListCollectionQuizzesArgs,
+  ): Promise<ListCollectionQuizzesResult> {
+    const existingCollection = await this.collectionRepo.getCollectionById(args.collectionId)
+    if (!existingCollection)
+      return Left.create({
+        code: 'collection_not_found',
+        status: HttpStatus.NOT_FOUND,
+        message: 'collection not found',
+      })
+
+    const canAccessQuiz = args.userId === existingCollection.creator || existingCollection.isVisible
+
+    if (!canAccessQuiz)
+      return Left.create({
+        code: 'collection_not_available',
+        status: HttpStatus.BAD_REQUEST,
+        message: 'collection not available',
+      })
+
+    const quizzes = await this.collectionQuizRepo.listCollectionQuizzes(args.collectionId)
+    const filteredMappedQuizzes = quizzes
+      .filter((quiz) => args.userId === quiz.creator || quiz.isVisible)
+      .map(this.quizMapper.toDTO)
+
+    return Right.create(filteredMappedQuizzes)
   }
 }

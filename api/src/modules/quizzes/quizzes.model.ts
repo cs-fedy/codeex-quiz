@@ -6,7 +6,7 @@ import User from '../users/users.domain'
 export type QuizDocument = HydratedDocument<Quiz>
 
 @Schema()
-class Quiz extends Document {
+export class Quiz extends Document {
   @Prop(String)
   title: string
 

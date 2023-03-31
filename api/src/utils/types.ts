@@ -53,3 +53,9 @@ export type CollectionQuizExist = {
   code: 'collection_quiz_exist'
   message: string
 }
+
+export type CollectionNotAvailable = {
+  code: 'collection_not_available'
+  status: HttpStatus.BAD_REQUEST
+  message: string
+}

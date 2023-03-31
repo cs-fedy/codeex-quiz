@@ -1,6 +1,5 @@
-import { HttpStatus } from '@nestjs/common'
 import Either from 'src/utils/either'
-import { CollectionNotFound } from 'src/utils/types'
+import { CollectionNotAvailable, CollectionNotFound } from 'src/utils/types'
 import CollectionDTO from './collections.dto'
 
 export type CreateCollectionArgs = {
@@ -15,12 +14,6 @@ export type CreateCollectionResult = Either<never, CollectionDTO>
 export type GetCollectionArgs = {
   userId: string
   collectionId: string
-}
-
-type CollectionNotAvailable = {
-  code: 'collection_not_available'
-  status: HttpStatus.BAD_REQUEST
-  message: string
 }
 
 export type GetCollectionResult = Either<CollectionNotFound | CollectionNotAvailable, CollectionDTO>
