@@ -3,8 +3,12 @@ import { Module } from '@nestjs/common'
 import { ConfigModule } from '@nestjs/config'
 import { MongooseModule } from '@nestjs/mongoose'
 import AccountsModule from './account/accounts.module'
+import AdminModule from './admin/admin.module'
 import AuthModule from './auth/auth.module'
+import CollectionQuizzesModule from './collection_quizzes/collection-quizzes.module'
+import CollectionsModule from './collections/collections.module'
 import ProfilesModule from './profiles/profiles.module'
+import QuizzesModule from './quizzes/quizzes.module'
 import ResetPasswordModule from './reset_password/reset-password.module'
 import UsersModule from './users/users.module'
 
@@ -30,6 +34,10 @@ const bullConnection = BullModule.forRoot({
     ProfilesModule,
     AccountsModule,
     ResetPasswordModule,
+    QuizzesModule,
+    AdminModule,
+    CollectionsModule,
+    CollectionQuizzesModule,
   ],
 })
 export default class AppModule {}

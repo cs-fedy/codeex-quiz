@@ -7,7 +7,7 @@ import ConfirmEmailArgs from './validators/confirm-email'
 @Controller(Routes.accounts)
 @UseGuards(RoleGuard(Roles.self))
 export default class AccountController {
-  constructor(@Inject(Services.accounts) private accountService: IAccountService) {}
+  constructor(@Inject(Services.account) private accountService: IAccountService) {}
 
   @Post(Routes.confirm)
   async confirmEmail(@Body() args: ConfirmEmailArgs) {
@@ -22,9 +22,7 @@ export default class AccountController {
 
   @Post(Routes.request)
   async requestConfirmEmail(@Body('userId') userId: string) {
-    // eslint-disable-next-line max-len
     const confirmEmailRequest = await this.accountService.requestConfirmEmail(userId)
-
     if (confirmEmailRequest.isLeft()) {
       const { code, status, message } = confirmEmailRequest.error
       throw new HttpException({ message, code }, status)

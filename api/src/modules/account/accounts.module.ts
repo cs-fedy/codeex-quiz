@@ -18,7 +18,7 @@ const accountQueue = BullModule.registerQueue({ name: Queues.accounts })
   controllers: [AccountController],
   imports: [accountQueue, AccessModule, MailModule, CacheModule, UsersModule],
   providers: [
-    { provide: Services.accounts, useClass: AccountService },
+    { provide: Services.account, useClass: AccountService },
     { provide: Queues.accounts, useClass: AccountConsumer },
     { provide: Events.accounts, useClass: AccountEvents },
   ],

@@ -16,14 +16,14 @@ export default class AuthController {
   ) {}
 
   @Post(Routes.register)
-  async register(@Body() registerArgs: RegisterArgs) {
+  async register(@Body() registerArgs: RegisterArgs, @Res() res: Response) {
     const createdUser = await this.userService.createUser(registerArgs)
     if (createdUser.isLeft()) {
       const { code, status, message } = createdUser.error
       throw new HttpException({ code, message }, status)
     }
 
-    return { createdUser: createdUser.value }
+    return res.status(HttpStatus.CREATED).json({ createdUser: createdUser.value })
   }
 
   @Post(Routes.login)

@@ -1,11 +1,17 @@
 export enum Models {
   users = 'users',
   refreshes = 'refreshes',
+  quizzes = 'quizzes',
+  collections = 'collections',
+  collectionQuizzes = 'collection_quizzes',
 }
 
 export enum Mappers {
   user = 'user_mapper',
   refresh = 'refresh_mapper',
+  quiz = 'quiz_mapper',
+  collection = 'collection_mapper',
+  collectionQuiz = 'collection_quiz_mapper',
 }
 
 export enum Repos {
@@ -13,11 +19,14 @@ export enum Repos {
   refresh = 'refresh_repo',
   whiteList = 'whiteList_repo',
   cache = 'cache_repo',
+  quiz = 'quiz_repo',
+  collection = 'collection_repo',
+  collectionQuiz = 'collection_quiz_repo',
 }
 
 export enum Services {
   user = 'user_service',
-  profile = 'profile_services',
+  profile = 'profile_service',
   access = 'access_service',
   hash = 'hash_service',
   refresh = 'refresh_service',
@@ -26,7 +35,10 @@ export enum Services {
   resetPassword = 'reset_password_service',
   confirmAccount = 'confirm_account_service',
   file = 'file_service',
-  accounts = 'accounts_services',
+  account = 'accounts_service',
+  admin = 'admin_service',
+  collection = 'collection_service',
+  collectionQuiz = 'collection_quiz_service',
 }
 
 export enum Roles {
@@ -54,6 +66,10 @@ export enum Routes {
   files = 'files',
   accounts = 'accounts',
   confirm = 'confirm',
+  quizzes = 'quizzes',
+  admin = 'admin',
+  collections = 'collections',
+  collectionQuizzes = 'collection_quizzes',
 }
 
 export enum Jobs {

@@ -11,7 +11,7 @@ import MailModule from '../mail/mail.module'
 import UsersController from './users.controllers'
 import UserEvents from './users.events'
 import { UserConsumer } from './users.jobs'
-import UsersMapper from './users.mapper'
+import UserMapper from './users.mapper'
 import { UserSchema } from './users.model'
 import UsersRepo from './users.repository'
 import UserService from './users.services'
@@ -23,7 +23,7 @@ const userModel = MongooseModule.forFeature([{ schema: UserSchema, name: Models.
   controllers: [UsersController],
   imports: [userQueue, userModel, AccessModule, MailModule, CacheModule],
   providers: [
-    { provide: Mappers.user, useClass: UsersMapper },
+    { provide: Mappers.user, useClass: UserMapper },
     { provide: Repos.user, useClass: UsersRepo },
     { provide: Services.hash, useClass: Hash },
     { provide: Services.user, useClass: UserService },
@@ -32,7 +32,7 @@ const userModel = MongooseModule.forFeature([{ schema: UserSchema, name: Models.
   ],
   exports: [
     { provide: Repos.user, useClass: UsersRepo },
-    { provide: Mappers.user, useClass: UsersMapper },
+    { provide: Mappers.user, useClass: UserMapper },
     { provide: Services.user, useClass: UserService },
   ],
 })
