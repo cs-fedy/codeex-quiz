@@ -35,4 +35,16 @@ export default class CollectionRepo implements ICollectionRepo {
     const fetchedCollection = await this.collectionModel.findById(collectionId)
     return fetchedCollection ? this.collectionMapper.toDomain(fetchedCollection) : null
   }
+
+  async listCollectionsByCreatorId(creator: string): Promise<Array<Collection>> {
+    const collections = await this.collectionModel.find({ creator })
+    const mappedCollections = collections.map(this.collectionMapper.toDomain)
+    return mappedCollections
+  }
+
+  async listCollections(): Promise<Array<Collection>> {
+    const collections = await this.collectionModel.find()
+    const mappedCollections = collections.map(this.collectionMapper.toDomain)
+    return mappedCollections
+  }
 }

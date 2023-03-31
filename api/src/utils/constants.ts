@@ -71,6 +71,7 @@ export enum Routes {
   admin = 'admin',
   collections = 'collections',
   collectionQuizzes = 'collection_quizzes',
+  public = 'public',
 }
 
 export enum Jobs {

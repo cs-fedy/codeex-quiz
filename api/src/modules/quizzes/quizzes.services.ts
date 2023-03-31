@@ -33,7 +33,7 @@ export default class QuizService implements IQuizService {
       return Left.create({
         code: 'quiz_not_available',
         status: HttpStatus.BAD_REQUEST,
-        message: '',
+        message: 'quiz not available',
       })
 
     const mappedQuiz = this.quizMapper.toDTO(existingQuiz)
