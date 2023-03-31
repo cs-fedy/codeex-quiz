@@ -1,42 +1,41 @@
 import { Inject, Injectable } from '@nestjs/common'
-import { Knex } from 'knex'
+import { InjectModel } from '@nestjs/mongoose'
+import { Model } from 'mongoose'
 import IMapper from 'src/common/mapper'
 import { Mappers, Models } from 'src/utils/constants'
-import { InjectConnection } from '../knex/decorators'
 import IUsersRepo from './IUsers.repository'
 import User from './users.domain'
 import UserDTO from './users.dto'
+import { UserDocument } from './users.model'
 
 @Injectable()
 export default class UsersRepo implements IUsersRepo {
   constructor(
-    @InjectConnection() private knexConnection: Knex,
+    @InjectModel(Models.users) private userModel: Model<UserDocument>,
     @Inject(Mappers.user) private userMapper: IMapper<User, UserDTO>,
   ) {}
 
   async getUserById(userId: string): Promise<User | null> {
-    const table = this.knexConnection(Models.users)
-    const fetchedUser = await table.select('*').where('id', userId).first()
+    const fetchedUser = await this.userModel.findById(userId)
     return fetchedUser ? this.userMapper.toDomain(fetchedUser) : null
   }
 
   async getUserByEmail(email: string): Promise<User | null> {
-    const table = this.knexConnection(Models.users)
-    const fetchedUser = await table.select('*').where('email', email).first()
+    const fetchedUser = await this.userModel.findOne({ email })
     return fetchedUser ? this.userMapper.toDomain(fetchedUser) : null
   }
 
   async getUserByUsername(username: string): Promise<User | null> {
-    const table = this.knexConnection(Models.users)
-    const fetchedUser = await table.select('*').where('username', username).first()
-
+    const fetchedUser = await this.userModel.findOne({ username })
     return fetchedUser ? this.userMapper.toDomain(fetchedUser) : null
   }
 
   async saveUser(args: User): Promise<User> {
-    const table = this.knexConnection(Models.users)
     const newUser = this.userMapper.toPersistence(args)
-    const [savedUser] = await table.insert(newUser).onConflict('id').merge().returning('*')
+    const savedUser = await this.userModel.findByIdAndUpdate(args.userId, newUser, {
+      upsert: true,
+      new: true,
+    })
 
     return this.userMapper.toDomain(savedUser)
   }

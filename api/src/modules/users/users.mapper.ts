@@ -7,27 +7,27 @@ import UserDTO from './users.dto'
 export default class UsersMapper implements IMapper<User, UserDTO> {
   toDomain(raw: any): User {
     return new User(
-      raw.id,
+      raw._id,
       raw.email,
       raw.username,
       raw.password,
-      raw.full_name,
+      raw.fullName,
       raw.roles,
-      raw.avatar_url,
-      raw.is_confirmed,
+      raw.avatarURL,
+      raw.isConfirmed,
     )
   }
 
   toPersistence(domain: User): any {
     return {
-      id: domain.userId,
+      _id: domain.userId,
       email: domain.email,
       username: domain.username,
       password: domain.password,
-      full_name: domain.fullName,
+      fullName: domain.fullName,
       roles: domain.roles,
-      avatar_url: domain.avatarURL,
-      is_confirmed: domain.isConfirmed,
+      avatarURL: domain.avatarURL,
+      isConfirmed: domain.isConfirmed,
     }
   }
 

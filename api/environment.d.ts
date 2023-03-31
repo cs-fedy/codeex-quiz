@@ -12,11 +12,7 @@ declare namespace NodeJS {
     JWT_SECRET: string
     JWT_ACCESS_EXPIRATION_MINUTES: number
     JWT_REFRESH_EXPIRATION_DAYS: number
-    POSTGRES_HOST: string
-    POSTGRES_PASSWORD: string
-    POSTGRES_PORT: number
-    POSTGRES_USER: string
-    POSTGRES_DB: string
+    MONGODB_URL: string
     REDIS_PORT: number
     REDIS_HOST: string
     SENDGRID_KEY: string
