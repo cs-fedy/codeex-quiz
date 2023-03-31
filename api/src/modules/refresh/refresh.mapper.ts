@@ -6,12 +6,12 @@ import RefreshDTO from './refresh.dto'
 @Injectable()
 export default class RefreshMapper implements IMapper<Refresh, RefreshDTO> {
   toDomain(raw: any): Refresh {
-    return new Refresh(raw.id, raw.token, raw.owner, raw.expires_in)
+    return new Refresh(raw._id, raw.token, raw.owner, raw.expires_in)
   }
 
   toPersistence(domain: Refresh): any {
     return {
-      id: domain.refreshId,
+      _id: domain.refreshId,
       token: domain.token,
       owner: domain.owner,
       expires_in: domain.expiresIn,

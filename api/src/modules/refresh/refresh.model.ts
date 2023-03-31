@@ -6,7 +6,7 @@ import User from '../users/users.domain'
 export type RefreshDocument = HydratedDocument<Refresh>
 
 @Schema()
-class Refresh {
+export class Refresh {
   @Prop(String)
   token: string
 

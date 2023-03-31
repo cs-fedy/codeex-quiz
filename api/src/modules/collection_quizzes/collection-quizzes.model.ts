@@ -7,7 +7,7 @@ import Collection from './collection-quizzes.domain'
 export type CollectionQuizDocument = HydratedDocument<CollectionQuiz>
 
 @Schema()
-class CollectionQuiz {
+export class CollectionQuiz {
   @Prop({
     type: mongoose.Types.ObjectId,
     ref: Models.collections,

@@ -5,7 +5,7 @@ import { Roles } from 'src/utils/constants'
 export type UserDocument = HydratedDocument<User>
 
 @Schema()
-class User extends Document {
+export class User extends Document {
   @Prop(String)
   email: string
 

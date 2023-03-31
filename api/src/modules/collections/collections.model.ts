@@ -6,7 +6,7 @@ import User from '../users/users.domain'
 export type CollectionDocument = HydratedDocument<Collection>
 
 @Schema()
-class Collection extends Document {
+export class Collection extends Document {
   @Prop(String)
   title: string
 
