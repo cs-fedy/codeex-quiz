@@ -2,12 +2,12 @@ import { Process, Processor } from '@nestjs/bull'
 import { Inject } from '@nestjs/common'
 import { Job } from 'bull'
 import * as moment from 'moment'
-import IUsersRepo from 'src/modules/users/IUsers.repository'
+import IUsersRepo from 'src/modules/users/i-users.repository'
 import { Jobs, Queues, Repos, Services, confirmEmailKey } from 'src/utils/constants'
-import generateRandomCode from 'src/utils/randomCode'
-import ICacheRepo from '../cache/ICache.repository'
-import IMailService from '../mail/IMail.services'
-import { NewConfirmEmailRequestArgs } from './iaccount.events'
+import generateRandomCode from 'src/utils/random-code'
+import ICacheRepo from '../cache/i-cache.repository'
+import IMailService from '../mail/i-mail.services'
+import { NewConfirmEmailRequestArgs } from './i-accounts.events'
 
 @Processor(Queues.accounts)
 export class AccountConsumer {

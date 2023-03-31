@@ -3,11 +3,11 @@ import { Inject } from '@nestjs/common'
 import { Job } from 'bull'
 import * as moment from 'moment'
 import { Jobs, Queues, Repos, Services, confirmEmailKey } from 'src/utils/constants'
-import generateRandomCode from 'src/utils/randomCode'
-import ICacheRepo from '../cache/ICache.repository'
-import IMailService from '../mail/IMail.services'
-import { NewUserExistArgs } from './IUsers.events'
-import IUsersRepo from './IUsers.repository'
+import generateRandomCode from 'src/utils/random-code'
+import ICacheRepo from '../cache/i-cache.repository'
+import IMailService from '../mail/i-mail.services'
+import { NewUserExistArgs } from './i-users.events'
+import IUsersRepo from './i-users.repository'
 
 @Processor(Queues.users)
 export class UserConsumer {

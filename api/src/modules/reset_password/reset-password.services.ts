@@ -3,15 +3,15 @@ import * as moment from 'moment'
 import IHash from 'src/services/hashing'
 import { Events, Repos, Services, resetPasswordKey } from 'src/utils/constants'
 import { Left, Right } from 'src/utils/either'
-import generateRandomCode from 'src/utils/randomCode'
-import ICacheRepo from '../cache/ICache.repository'
-import IUsersRepo from '../users/IUsers.repository'
-import IResetPasswordEvents from './IResetPassword.events'
+import generateRandomCode from 'src/utils/random-code'
+import ICacheRepo from '../cache/i-cache.repository'
+import IUsersRepo from '../users/i-users.repository'
+import IResetPasswordEvents from './i-reset-password.events'
 import IResetPasswordService, {
   RequestResetPasswordResult,
   ResetPasswordArgs,
   ResetPasswordResult,
-} from './IResetPassword.services'
+} from './i-reset-password.services'
 
 @Injectable()
 export default class ResetPasswordService implements IResetPasswordService {

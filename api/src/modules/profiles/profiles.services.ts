@@ -3,17 +3,17 @@ import IMapper from 'src/common/mapper'
 import IHash from 'src/services/hashing'
 import { Events, Mappers, Repos, Services } from 'src/utils/constants'
 import { Left, Right } from 'src/utils/either'
-import IUsersRepo from '../users/IUsers.repository'
+import IUsersRepo from '../users/i-users.repository'
 import User from '../users/users.domain'
 import UserDTO from '../users/users.dto'
-import IProfileEvents from './IProfiles.events'
+import IProfileEvents from './i-profiles.events'
 import IProfileService, {
   UpdateCredentialsResult,
   UpdateEmailArgs,
   UpdatePasswordArgs,
   UpdateProfileArgs,
   UpdateProfileResult,
-} from './IProfiles.services'
+} from './i-profiles.services'
 
 @Injectable()
 export default class ProfileService implements IProfileService {

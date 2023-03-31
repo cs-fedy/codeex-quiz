@@ -7,10 +7,10 @@ import AccessModule from '../access/access.module'
 import CacheModule from '../cache/cache.module'
 import MailModule from '../mail/mail.module'
 import UsersModule from '../users/users.module'
-import AccountController from './account.controller'
-import AccountEvents from './account.events'
-import { AccountConsumer } from './account.jobs'
-import AccountService from './account.services'
+import AccountController from './accounts.controller'
+import AccountEvents from './accounts.events'
+import { AccountConsumer } from './accounts.jobs'
+import AccountService from './accounts.services'
 
 const accountQueue = BullModule.registerQueue({ name: Queues.accounts })
 

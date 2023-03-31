@@ -6,10 +6,10 @@ import AccessModule from '../access/access.module'
 import CacheModule from '../cache/cache.module'
 import MailModule from '../mail/mail.module'
 import UsersModule from '../users/users.module'
-import ResetPasswordController from './resetPassword.controllers'
-import ResetPasswordEvents from './resetPassword.events'
-import ResetPasswordConsumer from './resetPassword.jobs'
-import ResetPasswordService from './resetPassword.services'
+import ResetPasswordController from './reset-password.controllers'
+import ResetPasswordEvents from './reset-password.events'
+import ResetPasswordConsumer from './reset-password.jobs'
+import ResetPasswordService from './reset-password.services'
 
 const resetPasswordQueue = BullModule.registerQueue({
   name: Queues.resetPassword,

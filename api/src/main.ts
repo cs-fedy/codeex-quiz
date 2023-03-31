@@ -5,7 +5,7 @@ import * as cookieParser from 'cookie-parser'
 import helmet from 'helmet'
 import * as Morgan from 'src/config/morgan'
 import AppModule from './modules/app.module'
-import validationPipeOptions from './pipes/validationPipeOptions'
+import validationPipeOptions from './pipes/validation-pipe-options'
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule)

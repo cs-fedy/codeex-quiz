@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common'
 import { Repos, accessKey } from 'src/utils/constants'
-import ICacheRepo from '../cache/ICache.repository'
-import IWhiteListRepo from './IWhiteList.repository'
+import ICacheRepo from '../cache/i-cache.repository'
+import IWhiteListRepo from './i-white-list.repository'
 
 @Injectable()
 export default class WhiteListRepo implements IWhiteListRepo {

@@ -7,7 +7,7 @@ import {
   UseInterceptors,
 } from '@nestjs/common'
 import { FileInterceptor } from '@nestjs/platform-express'
-import filePipeValidator from 'src/pipes/filePipeValidator'
+import filePipeValidator from 'src/pipes/file-pipe-validator'
 import { Routes, Services, imagesMimeTypeRegex, oneMegabyte } from 'src/utils/constants'
 import { IFileService } from './IFile'
 

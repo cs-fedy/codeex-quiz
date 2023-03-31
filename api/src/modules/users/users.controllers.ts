@@ -1,7 +1,7 @@
 import { Body, Controller, Get, HttpException, Inject, UseGuards } from '@nestjs/common'
 import { RoleGuard } from 'src/guards/role'
 import { Roles, Routes, Services } from 'src/utils/constants'
-import IUserService from './IUser.services'
+import IUserService from './i-users.services'
 
 @Controller(Routes.users)
 @UseGuards(RoleGuard(Roles.self))

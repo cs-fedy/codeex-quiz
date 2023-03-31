@@ -1,6 +1,6 @@
 import { HttpException, HttpStatus, Inject, Injectable, NestMiddleware } from '@nestjs/common'
 import { NextFunction, Request, Response } from 'express'
-import IAccessService from 'src/modules/access/IAccess.services'
+import IAccessService from 'src/modules/access/i-access.services'
 import { Services } from 'src/utils/constants'
 
 @Injectable()

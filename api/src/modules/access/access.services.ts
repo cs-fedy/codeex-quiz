@@ -3,9 +3,9 @@ import { JwtService } from '@nestjs/jwt'
 import * as moment from 'moment'
 import { Repos } from 'src/utils/constants'
 import { Left, Right } from 'src/utils/either'
-import IAccessService, { BaseToken, VerifyTokenResult } from './IAccess.services'
-import IWhiteListRepo from './IWhiteList.repository'
 import AccessDTO from './access.dto'
+import IAccessService, { BaseToken, VerifyTokenResult } from './i-access.services'
+import IWhiteListRepo from './i-white-list.repository'
 
 @Injectable()
 export class AccessService implements IAccessService {

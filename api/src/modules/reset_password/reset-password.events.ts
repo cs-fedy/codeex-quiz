@@ -5,7 +5,7 @@ import { Jobs, Queues } from 'src/utils/constants'
 import IResetPasswordEvents, {
   NewPasswordUpdatedArgs,
   NewResetPasswordRequestArgs,
-} from './IResetPassword.events'
+} from './i-reset-password.events'
 
 @Injectable()
 export default class ResetPasswordEvents implements IResetPasswordEvents {

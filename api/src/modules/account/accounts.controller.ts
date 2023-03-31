@@ -1,8 +1,8 @@
 import { Body, Controller, HttpException, Inject, Post, UseGuards } from '@nestjs/common'
 import { RoleGuard } from 'src/guards/role'
 import { Roles, Routes, Services } from 'src/utils/constants'
-import IAccountService from './iaccount.services'
-import ConfirmEmailArgs from './validators/confirm_email'
+import IAccountService from './i-accounts.services'
+import ConfirmEmailArgs from './validators/confirm-email'
 
 @Controller(Routes.accounts)
 @UseGuards(RoleGuard(Roles.self))

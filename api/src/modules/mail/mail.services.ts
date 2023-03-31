@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import * as SendGrid from '@sendgrid/mail'
-import IMailService, { SendEmailArgs } from './IMail.services'
+import IMailService, { SendEmailArgs } from './i-mail.services'
 
 @Injectable()
 export class MailService implements IMailService {

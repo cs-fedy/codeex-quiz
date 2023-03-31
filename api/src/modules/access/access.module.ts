@@ -4,7 +4,7 @@ import { Repos, Services } from 'src/utils/constants'
 import CacheModule from '../cache/cache.module'
 import { redisModule } from '../redis/module.config'
 import { AccessService } from './access.services'
-import WhiteListRepo from './whiteList.repository'
+import WhiteListRepo from './white-list.repository'
 
 const jwt = JwtModule.register({})
 

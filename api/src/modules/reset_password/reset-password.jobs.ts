@@ -2,10 +2,10 @@ import { Process, Processor } from '@nestjs/bull'
 import { Inject } from '@nestjs/common'
 import { Job } from 'bull'
 import { Jobs, Queues, Repos, Services } from 'src/utils/constants'
-import IWhiteListRepo from '../access/IWhiteList.repository'
-import IMailService from '../mail/IMail.services'
-import IUsersRepo from '../users/IUsers.repository'
-import { NewPasswordUpdatedArgs, NewResetPasswordRequestArgs } from './IResetPassword.events'
+import IWhiteListRepo from '../access/i-white-list.repository'
+import IMailService from '../mail/i-mail.services'
+import IUsersRepo from '../users/i-users.repository'
+import { NewPasswordUpdatedArgs, NewResetPasswordRequestArgs } from './i-reset-password.events'
 
 @Processor(Queues.resetPassword)
 export default class ResetPasswordConsumer {

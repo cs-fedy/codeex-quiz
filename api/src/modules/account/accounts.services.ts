@@ -1,17 +1,17 @@
 import { HttpStatus, Inject, Injectable } from '@nestjs/common'
 import IMapper from 'src/common/mapper'
-import IUserRepo from 'src/modules/users/IUsers.repository'
+import IUserRepo from 'src/modules/users/i-users.repository'
 import User from 'src/modules/users/users.domain'
 import UserDTO from 'src/modules/users/users.dto'
 import { Events, Mappers, Repos, confirmEmailKey } from 'src/utils/constants'
 import { Left, Right } from 'src/utils/either'
-import ICacheRepo from '../cache/ICache.repository'
-import IAccountEvents from './iaccount.events'
+import ICacheRepo from '../cache/i-cache.repository'
+import IAccountEvents from './i-accounts.events'
 import IAccountService, {
   ConfirmEmailArgs,
   ConfirmEmailResult,
   RequestConfirmEmailResult,
-} from './iaccount.services'
+} from './i-accounts.services'
 
 @Injectable()
 export default class AccountService implements IAccountService {

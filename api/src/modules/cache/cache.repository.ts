@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common'
 import { Redis } from 'ioredis'
 import { IORedisKey } from '../redis/redis.module'
-import ICacheRepo from './ICache.repository'
+import ICacheRepo from './i-cache.repository'
 
 @Injectable()
 export default class CacheRepo<T extends string | number | Buffer> implements ICacheRepo<T> {

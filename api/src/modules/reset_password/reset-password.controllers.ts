@@ -1,8 +1,8 @@
 import { Body, Controller, HttpException, Inject, Post } from '@nestjs/common'
 import { Routes, Services } from 'src/utils/constants'
-import IResetPasswordService from './IResetPassword.services'
-import RequestResetPasswordArgs from './validators/requestResetPassword'
-import ResetPasswordArgs from './validators/resetPassword'
+import IResetPasswordService from './i-reset-password.services'
+import RequestResetPasswordArgs from './validators/request-reset-password'
+import ResetPasswordArgs from './validators/reset-password'
 
 @Controller(Routes.password)
 export default class ResetPasswordController {

@@ -1,12 +1,12 @@
 import { HttpStatus, Inject, Injectable } from '@nestjs/common'
-import IUserRepo from 'src/modules/users/IUsers.repository'
+import IUserRepo from 'src/modules/users/i-users.repository'
 import IHash from 'src/services/hashing'
 import { Repos, Services } from 'src/utils/constants'
 import { Left, Right } from 'src/utils/either'
-import IAccessService from '../access/IAccess.services'
-import IWhiteListRepo from '../access/IWhiteList.repository'
-import IRefreshRepo from '../refresh/IRefresh.repository'
-import IRefreshService from '../refresh/IRefresh.services'
+import IAccessService from '../access/i-access.services'
+import IWhiteListRepo from '../access/i-white-list.repository'
+import IRefreshRepo from '../refresh/i-refresh.repository'
+import IRefreshService from '../refresh/i-refresh.services'
 import IAuthService, {
   LoginArgs,
   LoginResult,
@@ -14,7 +14,7 @@ import IAuthService, {
   LogoutResult,
   RefreshArgs,
   RefreshResult,
-} from './IAuth.services'
+} from './i-auth.services'
 
 @Injectable()
 export default class AuthService implements IAuthService {
