@@ -29,4 +29,10 @@ export default class QuizRepo implements IQuizRepo {
     const fetchedQuiz = await this.quizModel.findById(quizId)
     return fetchedQuiz ? this.quizMapper.toDomain(fetchedQuiz) : null
   }
+
+  async listQuizzesByCreatorId(creator: string): Promise<Array<Quiz>> {
+    const quizzes = await this.quizModel.find({ creator })
+    const mappedQuizzes = quizzes.map(this.quizMapper.toDomain)
+    return mappedQuizzes
+  }
 }

@@ -39,6 +39,7 @@ export enum Services {
   admin = 'admin_service',
   collection = 'collection_service',
   collectionQuiz = 'collection_quiz_service',
+  quiz = 'quiz_service',
 }
 
 export enum Roles {
