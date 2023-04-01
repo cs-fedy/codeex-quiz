@@ -7,11 +7,13 @@ import AdminModule from './admin/admin.module'
 import AuthModule from './auth/auth.module'
 import CollectionQuizzesModule from './collection_quizzes/collection-quizzes.module'
 import CollectionsModule from './collections/collections.module'
+import MultipleChoiceQuestionsModule from './multiple_choice_questions/multiple-choice-questions.module'
 import NotificationsModule from './notifications/notifications.module'
 import ProfilesModule from './profiles/profiles.module'
 import QuizzesApprovalModule from './quiz_approval/quiz-approval.module'
 import QuizzesModule from './quizzes/quizzes.module'
 import ResetPasswordModule from './reset_password/reset-password.module'
+import SubQuizzesModule from './sub_quizzes/sub-quizzes.module'
 import UsersModule from './users/users.module'
 
 const config = ConfigModule.forRoot()
@@ -42,6 +44,8 @@ const bullConnection = BullModule.forRoot({
     CollectionQuizzesModule,
     NotificationsModule,
     QuizzesApprovalModule,
+    SubQuizzesModule,
+    MultipleChoiceQuestionsModule,
   ],
 })
 export default class AppModule {}

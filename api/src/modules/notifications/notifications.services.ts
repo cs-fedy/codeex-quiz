@@ -7,7 +7,7 @@ import INotificationService, {
   ListEmitterNotificationsResult,
   ListNewQuizNotificationsResult,
 } from './i-notifications.services'
-import NewQuizNotificationDTO from './new-quiz-notification'
+import NewQuizNotificationDTO from './new-quiz-notifications.dto'
 import INewQuizNotificationRepo from './repositories/i-new-quiz-notification'
 import INotificationRepo from './repositories/i-notifications'
 

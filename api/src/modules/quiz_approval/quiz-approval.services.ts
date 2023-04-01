@@ -22,7 +22,7 @@ export default class QuizApprovalService implements IQuizApprovalService {
   ) {}
 
   async requestQuizApproval(args: RequestQuizApprovalArgs): Promise<RequestQuizApprovalResult> {
-    const newQuiz = { ...args, quizId: generateId(), isApproved: false }
+    const newQuiz = { ...args, quizId: generateId(), isApproved: false, subQuizzesCount: 0 }
     const createdQuiz = await this.quizRepo.saveQuiz(newQuiz)
 
     await this.newQuizNotificationEvents.newQuizNotification({

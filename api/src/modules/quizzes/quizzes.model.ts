@@ -24,6 +24,9 @@ export class Quiz extends Document {
 
   @Prop({ type: mongoose.Types.ObjectId, ref: Models.users, required: true })
   creator: User | string
+
+  @Prop({ type: String, default: 0 })
+  subQuizzesCount: number
 }
 
 export const QuizSchema = SchemaFactory.createForClass(Quiz)

@@ -1,14 +1,45 @@
-import { NotificationStatus } from 'src/utils/constants'
-import Notification from './domains/notifications'
+import { Injectable } from '@nestjs/common'
+import IMapper from 'src/common/mapper'
+import NewQuizNotification from './domains/new-quiz-notification'
+import NewQuizNotificationDTO from './new-quiz-notifications.dto'
 
-export default class NewQuizNotificationDTO implements Notification {
-  constructor(
-    public notificationId: string,
-    public type: string,
-    public emitter: string,
-    public status: NotificationStatus,
-    public emittedAt: Date,
-    public quizId: string,
-    public decision?: string,
-  ) {}
+@Injectable()
+export default class NewQuizNotificationMapper
+  implements IMapper<NewQuizNotification, NewQuizNotificationDTO>
+{
+  toDomain(raw: any): NewQuizNotification {
+    return new NewQuizNotification(
+      raw._id,
+      raw.__type,
+      raw.emitter,
+      raw.status,
+      raw.emittedAt,
+      raw.quizId,
+      raw.decision,
+    )
+  }
+
+  toPersistence(domain: NewQuizNotification): any {
+    return {
+      _id: domain.notificationId,
+      __type: domain.type,
+      emitter: domain.emitter,
+      status: domain.status,
+      emittedAt: domain.emittedAt,
+      quizId: domain.quizId,
+      decision: domain.decision,
+    }
+  }
+
+  toDTO(domain: NewQuizNotification): NewQuizNotificationDTO {
+    return new NewQuizNotificationDTO(
+      domain.notificationId,
+      domain.type,
+      domain.emitter,
+      domain.status,
+      domain.emittedAt,
+      domain.quizId,
+      domain.decision,
+    )
+  }
 }

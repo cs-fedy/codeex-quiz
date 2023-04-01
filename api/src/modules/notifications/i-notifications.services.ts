@@ -1,6 +1,6 @@
 import Either from 'src/utils/either'
 import Notification from './domains/notifications'
-import NewQuizNotificationDTO from './new-quiz-notification'
+import NewQuizNotificationDTO from './new-quiz-notifications.dto'
 
 export type ListEmitterNotificationsResult = Either<never, Array<Notification>>
 export type ListNewQuizNotificationsResult = Either<never, Array<NewQuizNotificationDTO>>

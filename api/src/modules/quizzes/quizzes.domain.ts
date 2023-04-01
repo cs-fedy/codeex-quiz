@@ -7,5 +7,6 @@ export default class Quiz {
     public isVisible: boolean,
     public isApproved: boolean,
     public creator: string,
+    public subQuizzesCount: number,
   ) {}
 }
