@@ -28,7 +28,7 @@ export default class QuizService implements IQuizService {
         message: 'quiz not found',
       })
 
-    const canAccessQuiz = args.quizId === existingQuiz.creator || existingQuiz.isVisible
+    const canAccessQuiz = this.canAccessQuiz(existingQuiz, args.quizId)
     if (!canAccessQuiz)
       return Left.create({
         code: 'quiz_not_available',
@@ -43,9 +43,13 @@ export default class QuizService implements IQuizService {
   async listCreatorQuizzes(args: ListCreatorQuizzesArgs): Promise<ListCreatorQuizzesResult> {
     const quizzes = await this.quizRepo.listQuizzesByCreatorId(args.creator)
     const filteredMappedQuizzes = quizzes
-      .filter((quiz) => quiz.creator === args.userId || quiz.isVisible)
+      .filter((quiz) => this.canAccessQuiz(quiz, args.userId))
       .map(this.quizMapper.toDTO)
 
     return Right.create(filteredMappedQuizzes)
+  }
+
+  private canAccessQuiz(quiz: Quiz, userId: string): boolean {
+    return quiz.creator === userId || (quiz.isApproved && quiz.isVisible)
   }
 }

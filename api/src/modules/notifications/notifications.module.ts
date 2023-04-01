@@ -1,6 +1,9 @@
+import { BullModule } from '@nestjs/bull'
 import { Module } from '@nestjs/common'
 import { MongooseModule } from '@nestjs/mongoose'
-import { Mappers, Models, Repos } from 'src/utils/constants'
+import { Events, Mappers, Models, Queues, Repos } from 'src/utils/constants'
+import NewQuizNotificationEvents from './new-quiz-notification.events'
+import { NewQuizNotificationConsumer } from './new-quiz-notification.jobs'
 import NewQuizNotificationMapper from './new-quiz-notification.mapper'
 import { NewQuizNotificationSchema } from './new-quiz-notification.model'
 import NewQuizNotificationRepo from './new-quiz-notification.repository'
@@ -14,11 +17,16 @@ const notificationModel = MongooseModule.forFeature([
   },
 ])
 
+const newNotificationQueue = BullModule.registerQueue({ name: Queues.newQuizNotification })
+
 @Module({
-  imports: [notificationModel],
+  imports: [newNotificationQueue, notificationModel],
   providers: [
     { provide: Mappers.newQuizNotification, useClass: NewQuizNotificationMapper },
     { provide: Repos.newQuizNotification, useClass: NewQuizNotificationRepo },
+    { provide: Events.newQuizNotification, useClass: NewQuizNotificationEvents },
+    { provide: Queues.newQuizNotification, useClass: NewQuizNotificationConsumer },
   ],
+  exports: [{ provide: Events.newQuizNotification, useClass: NewQuizNotificationEvents }],
 })
 export default class NotificationsModule {}

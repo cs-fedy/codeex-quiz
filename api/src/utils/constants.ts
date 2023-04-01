@@ -44,6 +44,7 @@ export enum Services {
   collection = 'collection_service',
   collectionQuiz = 'collection_quiz_service',
   quiz = 'quiz_service',
+  quizApproval = 'quiz_approval_service',
 }
 
 export enum Roles {
@@ -76,6 +77,7 @@ export enum Routes {
   collections = 'collections',
   collectionQuizzes = 'collection_quizzes',
   public = 'public',
+  quizzesApproval = 'quizzes_approval',
 }
 
 export enum Jobs {
@@ -85,6 +87,7 @@ export enum Jobs {
   newPasswordUpdated = 'new_password_updated_job',
   newProfileEmailUpdated = 'new_profile_email_updated_job',
   newProfilePasswordUpdated = 'new_profile_password_updated_job',
+  newQuizNotification = 'new_quiz_notification_job',
 }
 
 export enum Queues {
@@ -92,6 +95,7 @@ export enum Queues {
   profiles = 'profiles_queue',
   accounts = 'accounts_queue',
   resetPassword = 'reset_password_queue',
+  newQuizNotification = 'new_quiz_notification_queue',
 }
 
 export enum Events {
@@ -99,6 +103,7 @@ export enum Events {
   profile = 'profile_events',
   accounts = 'accounts_events',
   resetPassword = 'reset_password_events',
+  newQuizNotification = 'new_quiz_notification_events',
 }
 
 export enum NotificationStatus {
