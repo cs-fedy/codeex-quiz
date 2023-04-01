@@ -8,7 +8,7 @@ import {
   NewQuizNotificationArgs,
   QuizApprovedNotificationArgs,
 } from './i-new-quiz-notification.events'
-import INewQuizNotificationRepo from './i-new-quiz-notification.repository'
+import INewQuizNotificationRepo from './repositories/i-new-quiz-notification'
 
 @Processor(Queues.newQuizNotification)
 export class NewQuizNotificationConsumer {

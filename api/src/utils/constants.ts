@@ -26,6 +26,7 @@ export enum Repos {
   collection = 'collection_repo',
   collectionQuiz = 'collection_quiz_repo',
   newQuizNotification = 'new_quiz_notification_repo',
+  notification = 'notification_repo',
 }
 
 export enum Services {
@@ -45,6 +46,7 @@ export enum Services {
   collectionQuiz = 'collection_quiz_service',
   quiz = 'quiz_service',
   quizApproval = 'quiz_approval_service',
+  notification = 'notification_service',
 }
 
 export enum Roles {
@@ -78,6 +80,9 @@ export enum Routes {
   collectionQuizzes = 'collection_quizzes',
   public = 'public',
   quizzesApproval = 'quizzes_approval',
+  notifications = 'notifications',
+  newQuizzes = 'new_quizzes',
+  emitter = 'emitter',
 }
 
 export enum Jobs {

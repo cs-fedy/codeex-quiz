@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import IMapper from 'src/common/mapper'
-import NewQuizNotification from './new-quiz-notification.domain'
-import NewQuizNotificationDTO from './new-quiz-notification.dto'
+import NewQuizNotification from '../domains/new-quiz-notification'
+import NewQuizNotificationDTO from '../new-quiz-notification'
 
 @Injectable()
 export default class NewQuizNotificationMapper

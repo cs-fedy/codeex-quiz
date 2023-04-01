@@ -3,10 +3,10 @@ import { InjectModel } from '@nestjs/mongoose'
 import { Model } from 'mongoose'
 import IMapper from 'src/common/mapper'
 import { Mappers, Models } from 'src/utils/constants'
-import INewQuizNotificationRepo from './i-new-quiz-notification.repository'
-import NewQuizNotification from './new-quiz-notification.domain'
-import NewQuizNotificationDTO from './new-quiz-notification.dto'
-import { NewQuizNotificationDocument } from './new-quiz-notification.model'
+import NewQuizNotification from '../domains/new-quiz-notification'
+import { NewQuizNotificationDocument } from '../models/new-quiz-notification'
+import NewQuizNotificationDTO from '../new-quiz-notification'
+import INewQuizNotificationRepo from './i-new-quiz-notification'
 
 @Injectable()
 export default class NewQuizNotificationRepo implements INewQuizNotificationRepo {
@@ -34,5 +34,10 @@ export default class NewQuizNotificationRepo implements INewQuizNotificationRepo
   async getNewQuizNotificationById(notificationId: string): Promise<NewQuizNotification | null> {
     const fetchedNotification = await this.newQuizNotificationModel.findById(notificationId)
     return fetchedNotification ? this.newQuizNotificationMapper.toDomain(fetchedNotification) : null
+  }
+
+  async listNewQuizNotifications(): Promise<NewQuizNotification[]> {
+    const notifications = await this.newQuizNotificationModel.find()
+    return notifications.map(this.newQuizNotificationMapper.toDomain)
   }
 }

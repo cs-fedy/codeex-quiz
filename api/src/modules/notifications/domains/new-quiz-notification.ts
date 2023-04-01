@@ -1,7 +1,7 @@
 import { NotificationStatus } from 'src/utils/constants'
-import Notification from './i-notifications'
+import Notification from './notifications'
 
-export default class NewQuizNotificationDTO implements Notification {
+export default class NewQuizNotification implements Notification {
   constructor(
     public notificationId: string,
     public type: string,

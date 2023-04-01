@@ -1,8 +1,8 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
 import mongoose, { HydratedDocument } from 'mongoose'
 import { Models, NotificationStatus } from 'src/utils/constants'
-import Quiz from '../quizzes/quizzes.domain'
-import User from '../users/users.domain'
+import Quiz from '../../quizzes/quizzes.domain'
+import User from '../../users/users.domain'
 
 export type NewQuizNotificationDocument = HydratedDocument<NewQuizNotification>
 
