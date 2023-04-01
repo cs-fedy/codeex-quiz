@@ -7,18 +7,19 @@
   "cSpell.words": [
     "appleboy",
     "codeex",
-    "INITDB",
+    "dtos",
     "lpos",
     "lpush",
+    "lrange",
     "lrem",
-    "middlewares",
     "nestjs",
     "sendgrid",
     "setex",
     "STROOOOOOOOOOOOOOOONG",
+    "uncolorize",
     "webfactory"
   ],
   "yaml.schemas": {
-    "https://raw.githubusercontent.com/deployphp/deployer/master/src/schema.json": "file:///home/f0odyy/data/prog/codeex/quiz/backend/.github/workflows/deploy.yml"
+    "https://json.schemastore.org/github-workflow.json": "file:///home/f0odyy/data/prog/codeex/quiz/backend/.github/workflows/deploy.yml"
   }
 }
