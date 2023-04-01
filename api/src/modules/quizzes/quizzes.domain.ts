@@ -5,6 +5,7 @@ export default class Quiz {
     public description: string,
     public coverImageURL: string,
     public isVisible: boolean,
+    public isApproved: boolean,
     public creator: string,
   ) {}
 }

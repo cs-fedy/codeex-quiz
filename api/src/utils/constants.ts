@@ -4,6 +4,8 @@ export enum Models {
   quizzes = 'quizzes',
   collections = 'collections',
   collectionQuizzes = 'collection_quizzes',
+  newQuizzes = 'new_quizzes',
+  notifications = 'notifications',
 }
 
 export enum Mappers {
@@ -12,6 +14,7 @@ export enum Mappers {
   quiz = 'quiz_mapper',
   collection = 'collection_mapper',
   collectionQuiz = 'collection_quiz_mapper',
+  newQuizNotification = 'new_quiz_notification_mapper',
 }
 
 export enum Repos {
@@ -22,6 +25,7 @@ export enum Repos {
   quiz = 'quiz_repo',
   collection = 'collection_repo',
   collectionQuiz = 'collection_quiz_repo',
+  newQuizNotification = 'new_quiz_notification_repo',
 }
 
 export enum Services {
@@ -95,6 +99,11 @@ export enum Events {
   profile = 'profile_events',
   accounts = 'accounts_events',
   resetPassword = 'reset_password_events',
+}
+
+export enum NotificationStatus {
+  read = 'read',
+  unread = 'unread',
 }
 
 export const imagesMimeTypeRegex = /(^image)(\/)[a-zA-Z0-9_]*/gm

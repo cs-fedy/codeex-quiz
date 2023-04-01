@@ -16,7 +16,7 @@ export default class AdminService implements IAdminService {
   ) {}
 
   async createQuiz(args: CreateQuizArgs): Promise<CreateQuizResult> {
-    const newQuiz = { ...args, quizId: generateId() }
+    const newQuiz = { ...args, quizId: generateId(), isApproved: true }
     const createdQuiz = await this.quizRepo.saveQuiz(newQuiz)
     const mappedQuiz = this.quizMapper.toDTO(createdQuiz)
     return Right.create(mappedQuiz)

@@ -5,6 +5,7 @@ export default class QuizDTO {
     public description: string,
     public coverImageURL: string,
     public isVisible: boolean,
+    public isApproved: boolean,
     public creator: string,
   ) {}
 }

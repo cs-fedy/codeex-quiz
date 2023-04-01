@@ -17,7 +17,7 @@ export default class CollectionQuizRepo implements ICollectionQuizRepo {
     private collectionQuizModel: Model<CollectionQuizDocument>,
     @Inject(Mappers.collectionQuiz)
     private collectionQuizMapper: IMapper<CollectionQuiz, CollectionQuizDTO>,
-    private quizMapper: IMapper<Quiz, QuizDTO>,
+    @Inject(Mappers.quiz) private quizMapper: IMapper<Quiz, QuizDTO>,
   ) {}
 
   async saveCollectionQuiz(args: CollectionQuiz): Promise<CollectionQuiz> {

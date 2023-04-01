@@ -7,6 +7,7 @@ import AdminModule from './admin/admin.module'
 import AuthModule from './auth/auth.module'
 import CollectionQuizzesModule from './collection_quizzes/collection-quizzes.module'
 import CollectionsModule from './collections/collections.module'
+import NotificationsModule from './notifications/notifications.module'
 import ProfilesModule from './profiles/profiles.module'
 import QuizzesModule from './quizzes/quizzes.module'
 import ResetPasswordModule from './reset_password/reset-password.module'
@@ -38,6 +39,7 @@ const bullConnection = BullModule.forRoot({
     AdminModule,
     CollectionsModule,
     CollectionQuizzesModule,
+    NotificationsModule,
   ],
 })
 export default class AppModule {}

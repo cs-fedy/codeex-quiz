@@ -19,6 +19,9 @@ export class Quiz extends Document {
   @Prop(Boolean)
   isVisible: boolean
 
+  @Prop(Boolean)
+  isApproved: boolean
+
   @Prop({ type: mongoose.Types.ObjectId, ref: Models.users, required: true })
   creator: User | string
 }
