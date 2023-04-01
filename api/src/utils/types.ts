@@ -59,3 +59,9 @@ export type CollectionNotAvailable = {
   status: HttpStatus.BAD_REQUEST
   message: string
 }
+
+export type NotificationNotFound = {
+  code: 'notification_not_found'
+  status: HttpStatus.NOT_FOUND
+  message: string
+}

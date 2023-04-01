@@ -12,7 +12,7 @@ import RequestQuizApprovalArgs from './validators/request-quiz-approval'
 export default class QuizApprovalController {
   constructor(@Inject(Services.quizApproval) private quizApprovalService: IQuizApprovalService) {}
 
-  @Post()
+  @Post(Routes.request)
   async requestQuizApproval(@Body() args: RequestQuizApprovalArgs, @Res() res: Response) {
     const formattedArgs = { ...args, creator: args.userId }
     const createdQuiz = await this.quizApprovalService.requestQuizApproval(formattedArgs)

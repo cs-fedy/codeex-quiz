@@ -9,5 +9,6 @@ export default class NewQuizNotificationDTO implements Notification {
     public status: NotificationStatus,
     public emittedAt: Date,
     public quizId: string,
+    public decision?: string,
   ) {}
 }

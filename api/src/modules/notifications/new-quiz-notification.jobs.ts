@@ -4,7 +4,10 @@ import { Job } from 'bull'
 import { Jobs, Models, NotificationStatus, Queues, Repos } from 'src/utils/constants'
 import generateId from 'src/utils/generate-id'
 import IQuizRepo from '../quizzes/i-quizzes.repository'
-import { NewQuizNotificationArgs } from './i-new-quiz-notification.events'
+import {
+  NewQuizNotificationArgs,
+  QuizApprovedNotificationArgs,
+} from './i-new-quiz-notification.events'
 import INewQuizNotificationRepo from './i-new-quiz-notification.repository'
 
 @Processor(Queues.newQuizNotification)
@@ -26,6 +29,21 @@ export class NewQuizNotificationConsumer {
       notificationId: generateId(),
       status: NotificationStatus.unread,
       type: Models.newQuizzes,
+    })
+  }
+
+  @Process(Jobs.quizApprovedNotification)
+  async quizApprovedNotification({ data }: Job<QuizApprovedNotificationArgs>) {
+    const existingNotification = await this.newQuizNotificationRepo.getNewQuizNotificationById(
+      data.notificationId,
+    )
+
+    if (!existingNotification) return
+
+    await this.newQuizNotificationRepo.saveNewQuizNotification({
+      ...existingNotification,
+      status: NotificationStatus.read,
+      decision: data.decision,
     })
   }
 }

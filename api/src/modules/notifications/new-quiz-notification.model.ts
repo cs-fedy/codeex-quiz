@@ -15,6 +15,9 @@ export class NewQuizNotification {
 
   @Prop({ type: mongoose.Types.ObjectId, ref: Models.quizzes, required: true })
   quizId: Quiz | string
+
+  @Prop(String)
+  decision?: string
 }
 
 export const NewQuizNotificationSchema = SchemaFactory.createForClass(NewQuizNotification)

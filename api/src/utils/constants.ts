@@ -88,6 +88,7 @@ export enum Jobs {
   newProfileEmailUpdated = 'new_profile_email_updated_job',
   newProfilePasswordUpdated = 'new_profile_password_updated_job',
   newQuizNotification = 'new_quiz_notification_job',
+  quizApprovedNotification = 'quiz_approved_notification_job',
 }
 
 export enum Queues {

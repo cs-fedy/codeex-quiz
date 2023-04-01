@@ -15,6 +15,7 @@ export default class NewQuizNotificationMapper
       raw.status,
       raw.emittedAt,
       raw.quizId,
+      raw.decision,
     )
   }
 
@@ -26,6 +27,7 @@ export default class NewQuizNotificationMapper
       status: domain.status,
       emittedAt: domain.emittedAt,
       quizId: domain.quizId,
+      decision: domain.decision,
     }
   }
 
@@ -37,6 +39,7 @@ export default class NewQuizNotificationMapper
       domain.status,
       domain.emittedAt,
       domain.quizId,
+      domain.decision,
     )
   }
 }
