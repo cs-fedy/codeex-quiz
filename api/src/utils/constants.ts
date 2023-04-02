@@ -114,6 +114,7 @@ export enum Jobs {
   newProfilePasswordUpdated = 'new_profile_password_updated_job',
   newQuizNotification = 'new_quiz_notification_job',
   quizApprovedNotification = 'quiz_approved_notification_job',
+  newSubQuiz = 'new_sub_quiz_job',
 }
 
 export enum Queues {
@@ -122,6 +123,7 @@ export enum Queues {
   accounts = 'accounts_queue',
   resetPassword = 'reset_password_queue',
   newQuizNotification = 'new_quiz_notification_queue',
+  newSubQuiz = 'new_sub_quiz_queue',
 }
 
 export enum Events {
@@ -130,6 +132,7 @@ export enum Events {
   accounts = 'accounts_events',
   resetPassword = 'reset_password_events',
   newQuizNotification = 'new_quiz_notification_events',
+  newSubQuiz = 'new_sub_quiz_events',
 }
 
 export enum NotificationStatus {

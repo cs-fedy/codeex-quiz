@@ -15,6 +15,7 @@ export default class QuizMapper implements IMapper<Quiz, QuizDTO> {
       raw.isApproved,
       raw.creator,
       raw.subQuizzesCount,
+      raw.dificulity,
     )
   }
 
@@ -28,6 +29,7 @@ export default class QuizMapper implements IMapper<Quiz, QuizDTO> {
       isApproved: domain.isApproved,
       creator: domain.creator,
       subQuizzesCount: domain.subQuizzesCount,
+      dificulity: domain.dificulity,
     }
   }
 
@@ -41,6 +43,7 @@ export default class QuizMapper implements IMapper<Quiz, QuizDTO> {
       domain.isApproved,
       domain.creator,
       domain.subQuizzesCount,
+      domain.dificulity,
     )
   }
 }

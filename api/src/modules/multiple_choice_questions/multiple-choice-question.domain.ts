@@ -10,6 +10,7 @@ export default class MultipleChoiceQuestion implements SubQuiz {
     public idealOptions: Array<number>,
     public points: number,
     public timeLimit: number,
+    public dificulity: number,
     public coverImageURL?: string,
   ) {}
 }

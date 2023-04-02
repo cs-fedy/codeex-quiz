@@ -12,6 +12,7 @@ export default class SubQuiz {
     public title: string,
     public points: number,
     public timeLimit: number,
+    public dificulity: number,
     public coverImageURL?: string,
   ) {}
 }

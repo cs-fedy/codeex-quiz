@@ -8,5 +8,6 @@ export default class QuizDTO {
     public isApproved: boolean,
     public creator: string,
     public subQuizzesCount: number,
+    public dificulity: number,
   ) {}
 }

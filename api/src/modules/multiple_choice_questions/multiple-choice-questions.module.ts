@@ -5,6 +5,7 @@ import { LoggedMiddleware } from 'src/middleware/logged'
 import { Mappers, Models, Repos, Services } from 'src/utils/constants'
 import AccessModule from '../access/access.module'
 import QuizzesModule from '../quizzes/quizzes.module'
+import SubQuizzesModule from '../sub_quizzes/sub-quizzes.module'
 import UsersModule from '../users/users.module'
 import MultipleChoiceQuestionController from './multiple-choice-questions.controller'
 import MultipleChoiceQuestionMapper from './multiple-choice-questions.mapper'
@@ -17,7 +18,13 @@ const multipleChoiceQuestionModel = MongooseModule.forFeature([
 ])
 
 @Module({
-  imports: [multipleChoiceQuestionModel, AccessModule, UsersModule, QuizzesModule],
+  imports: [
+    multipleChoiceQuestionModel,
+    AccessModule,
+    UsersModule,
+    QuizzesModule,
+    SubQuizzesModule,
+  ],
   controllers: [MultipleChoiceQuestionController],
   providers: [
     { provide: Mappers.multipleChoiceQuestion, useClass: MultipleChoiceQuestionMapper },

@@ -9,6 +9,7 @@ export default class TrueFalseQuestion implements SubQuiz {
     public idealOption: boolean,
     public points: number,
     public timeLimit: number,
+    public dificulity: number,
     public coverImageURL?: string,
   ) {}
 }

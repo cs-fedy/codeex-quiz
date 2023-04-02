@@ -11,6 +11,7 @@ export type CreateTrueFalseQuestionArgs = {
   coverImageURL?: string
   points: number
   timeLimit: number
+  dificulity: number
 }
 
 export type CreateTrueFalseQuestionResult = Either<

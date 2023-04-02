@@ -13,6 +13,7 @@ export class TrueFalseQuestion extends Document {
   coverImageURL?: string
   points: number
   timeLimit: number
+  dificulity: number
 
   @Prop(Boolean)
   idealOption: boolean

@@ -5,6 +5,7 @@ import { LoggedMiddleware } from 'src/middleware/logged'
 import { Mappers, Models, Repos, Services } from 'src/utils/constants'
 import AccessModule from '../access/access.module'
 import QuizzesModule from '../quizzes/quizzes.module'
+import SubQuizzesModule from '../sub_quizzes/sub-quizzes.module'
 import UsersModule from '../users/users.module'
 import TrueFalseQuestionController from './true-false-questions.controller'
 import TrueFalseQuestionMapper from './true-false-questions.mapper'
@@ -17,7 +18,7 @@ const trueFalseQuestionModel = MongooseModule.forFeature([
 ])
 
 @Module({
-  imports: [trueFalseQuestionModel, AccessModule, UsersModule, QuizzesModule],
+  imports: [trueFalseQuestionModel, AccessModule, UsersModule, QuizzesModule, SubQuizzesModule],
   controllers: [TrueFalseQuestionController],
   providers: [
     { provide: Mappers.trueFalseQuestion, useClass: TrueFalseQuestionMapper },

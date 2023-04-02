@@ -1,9 +1,10 @@
 import { HttpStatus, Inject, Injectable } from '@nestjs/common'
 import IMapper from 'src/common/mapper'
-import { Mappers, Repos } from 'src/utils/constants'
+import { Events, Mappers, Repos } from 'src/utils/constants'
 import { Left, Right } from 'src/utils/either'
 import generateId from 'src/utils/generate-id'
 import IQuizRepo from '../quizzes/i-quizzes.repository'
+import INewSubQuizEvents from '../sub_quizzes/i-new-sub-quiz.events'
 import { SubQuizTypes } from '../sub_quizzes/sub-quizzes.domain'
 import IMultipleChoiceQuestionRepo from './i-multiple-choice-questions.repository'
 import IMultipleChoiceQuestionService, {
@@ -26,6 +27,7 @@ export default class MultipleChoiceQuestionService implements IMultipleChoiceQue
       MultipleChoiceQuestion,
       MultipleChoiceQuestionDTO
     >,
+    @Inject(Events.newSubQuiz) private newSubQuizEvents: INewSubQuizEvents,
   ) {}
 
   async createSubQuiz(
@@ -50,6 +52,11 @@ export default class MultipleChoiceQuestionService implements IMultipleChoiceQue
       ...args,
       subQuizId: generateId(),
       type: SubQuizTypes.multipleChoiceQuestion,
+    })
+
+    await this.newSubQuizEvents.newSubQuiz({
+      subQuizId: createdSubQuiz.subQuizId,
+      quizId: args.quizId,
     })
 
     const mappedSubQuiz = this.multipleChoiceQuestionMapper.toDTO(createdSubQuiz)

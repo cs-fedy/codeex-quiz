@@ -17,6 +17,7 @@ export default class MultipleChoiceQuestionMapper
       raw.idealOptions,
       raw.points,
       raw.timeLimit,
+      raw.dificulity,
       raw.coverImageURL,
     )
   }
@@ -31,6 +32,7 @@ export default class MultipleChoiceQuestionMapper
       idealOptions: domain.idealOptions,
       points: domain.points,
       timeLimit: domain.timeLimit,
+      dificulity: domain.dificulity,
       coverImageURL: domain.coverImageURL,
     }
   }
@@ -45,6 +47,7 @@ export default class MultipleChoiceQuestionMapper
       domain.idealOptions,
       domain.points,
       domain.timeLimit,
+      domain.dificulity,
       domain.coverImageURL,
     )
   }

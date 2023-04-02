@@ -12,6 +12,7 @@ export default class SubQuizMapper implements IMapper<SubQuiz, SubQuizDTO> {
       raw.title,
       raw.points,
       raw.timeLimit,
+      raw.dificulity,
       raw.coverImageURL,
     )
   }
@@ -23,6 +24,7 @@ export default class SubQuizMapper implements IMapper<SubQuiz, SubQuizDTO> {
       quizId: domain.quizId,
       title: domain.title,
       timeLimit: domain.timeLimit,
+      dificulity: domain.dificulity,
       coverImageURL: domain.coverImageURL,
     }
   }
@@ -35,6 +37,7 @@ export default class SubQuizMapper implements IMapper<SubQuiz, SubQuizDTO> {
       domain.title,
       domain.points,
       domain.timeLimit,
+      domain.dificulity,
       domain.coverImageURL,
     )
   }

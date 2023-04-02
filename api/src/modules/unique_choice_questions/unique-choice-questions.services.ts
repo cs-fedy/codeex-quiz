@@ -1,9 +1,10 @@
 import { HttpStatus, Inject, Injectable } from '@nestjs/common'
 import IMapper from 'src/common/mapper'
-import { Mappers, Repos } from 'src/utils/constants'
+import { Events, Mappers, Repos } from 'src/utils/constants'
 import { Left, Right } from 'src/utils/either'
 import generateId from 'src/utils/generate-id'
 import IQuizRepo from '../quizzes/i-quizzes.repository'
+import INewSubQuizEvents from '../sub_quizzes/i-new-sub-quiz.events'
 import { SubQuizTypes } from '../sub_quizzes/sub-quizzes.domain'
 import IUniqueChoiceQuestionRepo from './i-unique-choice-questions.repository'
 import IUniqueChoiceQuestionService, {
@@ -23,6 +24,7 @@ export default class UniqueChoiceQuestionService implements IUniqueChoiceQuestio
     private uniqueChoiceQuestionRepo: IUniqueChoiceQuestionRepo,
     @Inject(Mappers.uniqueChoiceQuestion)
     private uniqueChoiceQuestionMapper: IMapper<UniqueChoiceQuestion, UniqueChoiceQuestionDTO>,
+    @Inject(Events.newSubQuiz) private newSubQuizEvents: INewSubQuizEvents,
   ) {}
 
   async createSubQuiz(
@@ -47,6 +49,11 @@ export default class UniqueChoiceQuestionService implements IUniqueChoiceQuestio
       ...args,
       subQuizId: generateId(),
       type: SubQuizTypes.uniqueChoiceQuestion,
+    })
+
+    await this.newSubQuizEvents.newSubQuiz({
+      subQuizId: createdSubQuiz.subQuizId,
+      quizId: args.quizId,
     })
 
     const mappedSubQuiz = this.uniqueChoiceQuestionMapper.toDTO(createdSubQuiz)

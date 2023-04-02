@@ -27,6 +27,9 @@ export class Quiz extends Document {
 
   @Prop({ type: String, default: 0 })
   subQuizzesCount: number
+
+  @Prop({ type: Number, default: 0 })
+  dificulity: number
 }
 
 export const QuizSchema = SchemaFactory.createForClass(Quiz)

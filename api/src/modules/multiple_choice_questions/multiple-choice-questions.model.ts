@@ -13,6 +13,7 @@ export class MultipleChoiceQuestion extends Document {
   coverImageURL?: string
   points: number
   timeLimit: number
+  dificulity: number
 
   @Prop([String])
   options: Array<string>

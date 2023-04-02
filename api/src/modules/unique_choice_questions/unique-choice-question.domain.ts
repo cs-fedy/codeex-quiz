@@ -10,6 +10,7 @@ export default class UniqueChoiceQuestion implements SubQuiz {
     public idealOption: number,
     public points: number,
     public timeLimit: number,
+    public dificulity: number,
     public coverImageURL?: string,
   ) {}
 }

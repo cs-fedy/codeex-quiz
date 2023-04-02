@@ -12,6 +12,7 @@ export type CreateUniqueChoiceQuestionArgs = {
   coverImageURL?: string
   points: number
   timeLimit: number
+  dificulity: number
 }
 
 export type CreateUniqueChoiceQuestionResult = Either<

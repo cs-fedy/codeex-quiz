@@ -1,9 +1,10 @@
 import { HttpStatus, Inject, Injectable } from '@nestjs/common'
 import IMapper from 'src/common/mapper'
-import { Mappers, Repos } from 'src/utils/constants'
+import { Events, Mappers, Repos } from 'src/utils/constants'
 import { Left, Right } from 'src/utils/either'
 import generateId from 'src/utils/generate-id'
 import IQuizRepo from '../quizzes/i-quizzes.repository'
+import INewSubQuizEvents from '../sub_quizzes/i-new-sub-quiz.events'
 import { SubQuizTypes } from '../sub_quizzes/sub-quizzes.domain'
 import ITrueFalseQuestionRepo from './i-true-false-questions.repository'
 import ITrueFalseQuestionService, {
@@ -23,6 +24,7 @@ export default class TrueFalseQuestionService implements ITrueFalseQuestionServi
     private trueFalseQuestionRepo: ITrueFalseQuestionRepo,
     @Inject(Mappers.trueFalseQuestion)
     private trueFalseQuestionMapper: IMapper<TrueFalseQuestion, TrueFalseQuestionDTO>,
+    @Inject(Events.newSubQuiz) private newSubQuizEvents: INewSubQuizEvents,
   ) {}
 
   async createSubQuiz(args: CreateTrueFalseQuestionArgs): Promise<CreateTrueFalseQuestionResult> {
@@ -45,6 +47,11 @@ export default class TrueFalseQuestionService implements ITrueFalseQuestionServi
       ...args,
       subQuizId: generateId(),
       type: SubQuizTypes.trueFalseQuestion,
+    })
+
+    await this.newSubQuizEvents.newSubQuiz({
+      subQuizId: createdSubQuiz.subQuizId,
+      quizId: args.quizId,
     })
 
     const mappedSubQuiz = this.trueFalseQuestionMapper.toDTO(createdSubQuiz)

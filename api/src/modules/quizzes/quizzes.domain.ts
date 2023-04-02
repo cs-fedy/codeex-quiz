@@ -8,5 +8,6 @@ export default class Quiz {
     public isApproved: boolean,
     public creator: string,
     public subQuizzesCount: number,
+    public dificulity: number,
   ) {}
 }

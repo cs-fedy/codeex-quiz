@@ -28,6 +28,9 @@ export class SubQuiz extends Document {
 
   @Prop(Number)
   timeLimit: number
+
+  @Prop({ type: Number, max: 3, min: 1 })
+  dificulity: number
 }
 
 export const SubQuizSchema = SchemaFactory.createForClass(SubQuiz)
