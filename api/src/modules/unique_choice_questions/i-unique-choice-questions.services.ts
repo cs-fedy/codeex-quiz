@@ -1,22 +1,22 @@
 import Either from 'src/utils/either'
 import { NotQuizOwner, QuizAccessForbidden, QuizNotFound, SubQuizNotFound } from 'src/utils/types'
-import MultipleChoiceQuestionDTO from './multiple-choice-questions.dto'
+import UniqueChoiceQuestionDTO from './unique-choice-questions.dto'
 
-export type CreateMultipleChoiceQuestionArgs = {
+export type CreateUniqueChoiceQuestionArgs = {
   userId: string
   subQuizId: string
   quizId: string
   title: string
   options: Array<string>
-  idealOptions: Array<number>
+  idealOption: number
   coverImageURL?: string
   points: number
   timeLimit: number
 }
 
-export type CreateMultipleChoiceQuestionResult = Either<
+export type CreateUniqueChoiceQuestionResult = Either<
   QuizNotFound | NotQuizOwner,
-  MultipleChoiceQuestionDTO
+  UniqueChoiceQuestionDTO
 >
 
 export type GetSubQuizArgs = {
@@ -27,10 +27,10 @@ export type GetSubQuizArgs = {
 
 export type GetSubQuizResult = Either<
   QuizNotFound | SubQuizNotFound | QuizAccessForbidden,
-  MultipleChoiceQuestionDTO
+  UniqueChoiceQuestionDTO
 >
 
-export default interface IMultipleChoiceQuestionService {
-  createSubQuiz(args: CreateMultipleChoiceQuestionArgs): Promise<CreateMultipleChoiceQuestionResult>
+export default interface IUniqueChoiceQuestionService {
+  createSubQuiz(args: CreateUniqueChoiceQuestionArgs): Promise<CreateUniqueChoiceQuestionResult>
   getSubQuiz(args: GetSubQuizArgs): Promise<GetSubQuizResult>
 }

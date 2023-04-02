@@ -71,3 +71,15 @@ export type QuizAccessForbidden = {
   status: HttpStatus.FORBIDDEN
   message: string
 }
+
+export type SubQuizNotFound = {
+  code: 'sub_quiz_not_found'
+  status: HttpStatus.NOT_FOUND
+  message: string
+}
+
+export type NotQuizOwner = {
+  code: 'not_quiz_owner'
+  status: HttpStatus.FORBIDDEN
+  message: string
+}
