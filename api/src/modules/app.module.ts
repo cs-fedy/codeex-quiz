@@ -14,6 +14,7 @@ import QuizzesApprovalModule from './quiz_approval/quiz-approval.module'
 import QuizzesModule from './quizzes/quizzes.module'
 import ResetPasswordModule from './reset_password/reset-password.module'
 import SubQuizzesModule from './sub_quizzes/sub-quizzes.module'
+import TrueFalseQuestionsModule from './true_false_questions/true-false-questions.module'
 import UniqueChoiceQuestionsModule from './unique_choice_questions/unique-choice-questions.module'
 import UsersModule from './users/users.module'
 
@@ -48,6 +49,7 @@ const bullConnection = BullModule.forRoot({
     SubQuizzesModule,
     MultipleChoiceQuestionsModule,
     UniqueChoiceQuestionsModule,
+    TrueFalseQuestionsModule,
   ],
 })
 export default class AppModule {}

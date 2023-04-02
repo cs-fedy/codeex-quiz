@@ -22,6 +22,7 @@ export enum Mappers {
   multipleChoiceQuestion = 'multiple_choice_question_mapper',
   subQuiz = 'sub_quiz_mapper',
   uniqueChoiceQuestion = 'unique_choice_question_mapper',
+  trueFalseQuestion = 'true_false_question_mapper',
 }
 
 export enum Repos {
@@ -37,6 +38,7 @@ export enum Repos {
   multipleChoiceQuestion = 'multiple_choice_question_repo',
   subQuiz = 'sub_quiz_repo',
   uniqueChoiceQuestion = 'unique_choice_question_repo',
+  trueFalseQuestion = 'true_false_question_repo',
 }
 
 export enum Services {
@@ -60,6 +62,7 @@ export enum Services {
   multipleChoiceQuestion = 'multiple_choice_question_service',
   subQuiz = 'sub_quiz_service',
   uniqueChoiceQuestion = 'unique_choice_question_services',
+  trueFalseQuestion = 'true_false_question_services',
 }
 
 export enum Roles {
@@ -99,6 +102,7 @@ export enum Routes {
   multipleChoiceQuestions = 'multiple_choice_questions',
   subQuizzes = 'sub_quizzes',
   uniqueChoiceQuestions = 'unique_choice_questions',
+  trueFalseQuestions = 'true_false_questions',
 }
 
 export enum Jobs {
