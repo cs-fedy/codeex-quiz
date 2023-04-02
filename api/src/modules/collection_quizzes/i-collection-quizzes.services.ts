@@ -4,7 +4,7 @@ import {
   CollectionNotFound,
   CollectionQuizExist,
   NotCollectionOwner,
-  QuizNotAvailable,
+  NotQuizOwner,
   QuizNotFound,
 } from 'src/utils/types'
 import QuizDTO from '../quizzes/quizzes.dto'
@@ -17,7 +17,7 @@ export type AddQuizArgs = {
 }
 
 export type AddQuizResult = Either<
-  QuizNotFound | QuizNotAvailable | CollectionNotFound | NotCollectionOwner | CollectionQuizExist,
+  QuizNotFound | CollectionNotFound | NotCollectionOwner | CollectionQuizExist | NotQuizOwner,
   CollectionQuizDTO
 >
 

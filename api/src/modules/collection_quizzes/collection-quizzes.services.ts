@@ -37,12 +37,11 @@ export default class CollectionQuizService implements ICollectionQuizService {
         message: 'quiz not found',
       })
 
-    const quizAvailable = args.userId === existingQuiz.creator || existingQuiz.isVisible
-    if (!quizAvailable)
+    if (args.userId !== existingQuiz.creator)
       return Left.create({
-        code: 'quiz_not_available',
-        status: HttpStatus.BAD_REQUEST,
-        message: 'quiz not available',
+        code: 'not_quiz_owner',
+        status: HttpStatus.FORBIDDEN,
+        message: 'not quiz owner',
       })
 
     const existingCollection = await this.collectionRepo.getCollectionById(args.collectionId)
