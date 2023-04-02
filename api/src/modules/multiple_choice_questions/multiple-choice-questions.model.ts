@@ -11,6 +11,8 @@ export class MultipleChoiceQuestion extends Document {
   quizId: Quiz | string
   title: string
   coverImageURL?: string
+  points: number
+  timeLimit: number
 
   @Prop([String])
   options: Array<string>

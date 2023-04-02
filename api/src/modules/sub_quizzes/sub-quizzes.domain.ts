@@ -10,6 +10,8 @@ export default class SubQuiz {
     public type: SubQuizTypes,
     public quizId: string,
     public title: string,
+    public points: number,
+    public timeLimit: number,
     public coverImageURL?: string,
   ) {}
 }

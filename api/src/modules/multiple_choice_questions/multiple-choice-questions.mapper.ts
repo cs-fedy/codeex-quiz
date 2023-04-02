@@ -15,6 +15,8 @@ export default class MultipleChoiceQuestionMapper
       raw.title,
       raw.options,
       raw.idealOptions,
+      raw.points,
+      raw.timeLimit,
       raw.coverImageURL,
     )
   }
@@ -39,6 +41,8 @@ export default class MultipleChoiceQuestionMapper
       domain.title,
       domain.options,
       domain.idealOptions,
+      domain.points,
+      domain.timeLimit,
       domain.coverImageURL,
     )
   }

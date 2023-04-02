@@ -1,5 +1,5 @@
 import { Type } from 'class-transformer'
-import { IsNotEmpty, IsString, IsUrl } from 'class-validator'
+import { IsNotEmpty, IsNumber, IsString, IsUrl } from 'class-validator'
 
 export default class CreateSubQuizArgs {
   @IsNotEmpty({ message: 'user id is required' })
@@ -25,6 +25,14 @@ export default class CreateSubQuizArgs {
   @IsNotEmpty({ message: 'ideal options is required' })
   @Type(() => Array<number>)
   idealOptions: Array<number>
+
+  @IsNotEmpty({ message: 'quiz points is required' })
+  @IsNumber()
+  points: number
+
+  @IsNotEmpty({ message: 'time limit is required' })
+  @IsNumber()
+  timeLimit: number
 
   @IsUrl()
   coverImageURL?: string

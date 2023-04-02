@@ -22,6 +22,12 @@ export class SubQuiz extends Document {
 
   @Prop(String)
   coverImageURL?: string
+
+  @Prop(Number)
+  points: number
+
+  @Prop(Number)
+  timeLimit: number
 }
 
 export const SubQuizSchema = SchemaFactory.createForClass(SubQuiz)

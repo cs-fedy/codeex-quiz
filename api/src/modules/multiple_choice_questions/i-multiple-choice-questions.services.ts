@@ -11,6 +11,8 @@ export type CreateMultipleChoiceQuestionArgs = {
   options: Array<string>
   idealOptions: Array<number>
   coverImageURL?: string
+  points: number
+  timeLimit: number
 }
 
 type NotQuizOwner = {
@@ -24,6 +26,24 @@ export type CreateMultipleChoiceQuestionResult = Either<
   MultipleChoiceQuestionDTO
 >
 
+export type GetSubQuizArgs = {
+  subQuizId: string
+  userId: string
+  isAdmin: boolean
+}
+
+type SubQuizNotFound = {
+  code: 'sub_quiz_not_found'
+  status: HttpStatus.NOT_FOUND
+  message: string
+}
+
+export type GetSubQuizResult = Either<
+  QuizNotFound | SubQuizNotFound | NotQuizOwner,
+  MultipleChoiceQuestionDTO
+>
+
 export default interface IMultipleChoiceQuestionService {
   createSubQuiz(args: CreateMultipleChoiceQuestionArgs): Promise<CreateMultipleChoiceQuestionResult>
+  getSubQuiz(args: GetSubQuizArgs): Promise<GetSubQuizResult>
 }

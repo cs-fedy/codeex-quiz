@@ -8,6 +8,8 @@ export default class MultipleChoiceQuestionDTO implements SubQuiz {
     public title: string,
     public options: Array<string>,
     public idealOptions: Array<number>,
+    public points: number,
+    public timeLimit: number,
     public coverImageURL?: string,
   ) {}
 }

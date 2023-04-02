@@ -33,4 +33,10 @@ export default class MultipleChoiceQuestionRepo implements IMultipleChoiceQuesti
 
     return this.multipleChoiceQuestionMapper.toDomain(savedMultipleChoiceQuestion)
   }
+
+  async getMultipleChoiceQuestion(subQuizId: string): Promise<MultipleChoiceQuestion | null> {
+    const subQuiz = await this.multipleChoiceQuestionModel.findById(subQuizId)
+    const mappedSubQuiz = this.multipleChoiceQuestionMapper.toDomain(subQuiz)
+    return mappedSubQuiz
+  }
 }

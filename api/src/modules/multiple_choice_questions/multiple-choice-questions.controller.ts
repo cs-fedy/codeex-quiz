@@ -1,9 +1,11 @@
 import {
   Body,
   Controller,
+  Get,
   HttpException,
   HttpStatus,
   Inject,
+  Param,
   Post,
   Res,
   UseGuards,
@@ -14,6 +16,7 @@ import { RoleGuard } from 'src/guards/role'
 import { Roles, Routes, Services } from 'src/utils/constants'
 import IMultipleChoiceQuestionService from './i-multiple-choice-questions.services'
 import CreateSubQuizArgs from './validators/create-sub-quiz'
+import GetSubQuizArgs from './validators/get-sub-quiz'
 
 @Controller(Routes.multipleChoiceQuestions)
 @UseGuards(AccountConfirmedGuard())
@@ -33,5 +36,21 @@ export default class MultipleChoiceQuestionController {
     }
 
     return res.status(HttpStatus.CREATED).json({ createdSubQuiz: createdSubQuiz.value })
+  }
+
+  @Get(':subQuizId')
+  async getSubQuiz(@Body() args: GetSubQuizArgs, @Param('subQuizId') subQuizId: string) {
+    const subQuiz = await this.multipleChoiceQuestionService.getSubQuiz({
+      userId: args.userId,
+      isAdmin: args.roles.includes(Roles.admin),
+      subQuizId,
+    })
+
+    if (subQuiz.isLeft()) {
+      const { message, status, code } = subQuiz.error
+      throw new HttpException({ message, code }, status)
+    }
+
+    return { subQuiz: subQuiz.value }
   }
 }
