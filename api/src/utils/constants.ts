@@ -20,6 +20,7 @@ export enum Mappers {
   collectionQuiz = 'collection_quiz_mapper',
   newQuizNotification = 'new_quiz_notification_mapper',
   multipleChoiceQuestion = 'multiple_choice_question_mapper',
+  subQuiz = 'sub_quiz_mapper',
 }
 
 export enum Repos {
@@ -33,6 +34,7 @@ export enum Repos {
   newQuizNotification = 'new_quiz_notification_repo',
   notification = 'notification_repo',
   multipleChoiceQuestion = 'multiple_choice_question_repo',
+  subQuiz = 'sub_quiz_repo',
 }
 
 export enum Services {
@@ -54,6 +56,7 @@ export enum Services {
   quizApproval = 'quiz_approval_service',
   notification = 'notification_service',
   multipleChoiceQuestion = 'multiple_choice_question_service',
+  subQuiz = 'sub_quiz_service',
 }
 
 export enum Roles {
@@ -91,6 +94,7 @@ export enum Routes {
   newQuizzes = 'new_quizzes',
   emitter = 'emitter',
   multipleChoiceQuestions = 'multiple_choice_questions',
+  subQuizzes = 'sub_quizzes',
 }
 
 export enum Jobs {

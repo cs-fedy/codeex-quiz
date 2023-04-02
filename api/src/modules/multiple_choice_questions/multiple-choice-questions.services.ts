@@ -78,9 +78,9 @@ export default class MultipleChoiceQuestionService implements IMultipleChoiceQue
 
     if (!args.isAdmin && exitingQuiz.creator !== args.userId)
       return Left.create({
-        code: 'not_quiz_owner',
+        code: 'quiz_access_forbidden',
         status: HttpStatus.FORBIDDEN,
-        message: 'not quiz owner',
+        message: 'forbidden to access quiz',
       })
 
     const mappedSubQuiz = this.multipleChoiceQuestionMapper.toDTO(existingSubQuiz)

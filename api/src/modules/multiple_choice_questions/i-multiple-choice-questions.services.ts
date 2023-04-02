@@ -1,6 +1,6 @@
 import { HttpStatus } from '@nestjs/common'
 import Either from 'src/utils/either'
-import { QuizNotFound } from 'src/utils/types'
+import { QuizAccessForbidden, QuizNotFound } from 'src/utils/types'
 import MultipleChoiceQuestionDTO from './multiple-choice-questions.dto'
 
 export type CreateMultipleChoiceQuestionArgs = {
@@ -39,7 +39,7 @@ type SubQuizNotFound = {
 }
 
 export type GetSubQuizResult = Either<
-  QuizNotFound | SubQuizNotFound | NotQuizOwner,
+  QuizNotFound | SubQuizNotFound | QuizAccessForbidden,
   MultipleChoiceQuestionDTO
 >
 

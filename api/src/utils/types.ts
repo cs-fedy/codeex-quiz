@@ -65,3 +65,9 @@ export type NotificationNotFound = {
   status: HttpStatus.NOT_FOUND
   message: string
 }
+
+export type QuizAccessForbidden = {
+  code: 'quiz_access_forbidden'
+  status: HttpStatus.FORBIDDEN
+  message: string
+}

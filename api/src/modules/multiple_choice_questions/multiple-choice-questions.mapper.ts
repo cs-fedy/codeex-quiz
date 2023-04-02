@@ -29,6 +29,8 @@ export default class MultipleChoiceQuestionMapper
       title: domain.title,
       options: domain.options,
       idealOptions: domain.idealOptions,
+      points: domain.points,
+      timeLimit: domain.timeLimit,
       coverImageURL: domain.coverImageURL,
     }
   }
