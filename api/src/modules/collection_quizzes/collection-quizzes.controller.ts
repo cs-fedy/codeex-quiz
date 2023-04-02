@@ -1,9 +1,11 @@
 import {
   Body,
   Controller,
+  Get,
   HttpException,
   HttpStatus,
   Inject,
+  Param,
   Post,
   Res,
   UseGuards,
@@ -35,5 +37,19 @@ export default class CollectionQuizController {
     }
 
     return res.status(HttpStatus.CREATED).json({ createdCollection: createdCollection.value })
+  }
+
+  @Get('collections/:collectionId')
+  async listCollectionQuizzes(
+    @Body('userId') userId: string,
+    @Param('collectionId') collectionId: string,
+  ) {
+    const quizzes = await this.collectionQuizService.listCollectionQuizzes({ userId, collectionId })
+    if (quizzes.isLeft()) {
+      const { message, status, code } = quizzes.error
+      throw new HttpException({ message, code }, status)
+    }
+
+    return { collectionQuizzes: quizzes.value }
   }
 }
