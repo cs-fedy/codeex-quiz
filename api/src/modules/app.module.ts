@@ -5,6 +5,7 @@ import { MongooseModule } from '@nestjs/mongoose'
 import AccountsModule from './account/accounts.module'
 import AdminModule from './admin/admin.module'
 import AuthModule from './auth/auth.module'
+import BookmarksModule from './bookmarks/bookmarks.module'
 import CollectionQuizzesModule from './collection_quizzes/collection-quizzes.module'
 import CollectionsModule from './collections/collections.module'
 import MultipleChoiceQuestionsModule from './multiple_choice_questions/multiple-choice-questions.module'
@@ -50,6 +51,7 @@ const bullConnection = BullModule.forRoot({
     MultipleChoiceQuestionsModule,
     UniqueChoiceQuestionsModule,
     TrueFalseQuestionsModule,
+    BookmarksModule,
   ],
 })
 export default class AppModule {}

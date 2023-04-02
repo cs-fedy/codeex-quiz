@@ -10,6 +10,7 @@ export enum Models {
   uniqueChoiceQuestion = 'unique_choice_questions',
   trueFalseQuestion = 'true_false_questions',
   subQuizzes = 'sub_quizzes',
+  bookmarks = 'bookmarks',
 }
 
 export enum Mappers {
@@ -23,6 +24,7 @@ export enum Mappers {
   subQuiz = 'sub_quiz_mapper',
   uniqueChoiceQuestion = 'unique_choice_question_mapper',
   trueFalseQuestion = 'true_false_question_mapper',
+  bookmark = 'bookmark_mapper',
 }
 
 export enum Repos {
@@ -39,6 +41,7 @@ export enum Repos {
   subQuiz = 'sub_quiz_repo',
   uniqueChoiceQuestion = 'unique_choice_question_repo',
   trueFalseQuestion = 'true_false_question_repo',
+  bookmark = 'bookmark_repo',
 }
 
 export enum Services {
@@ -63,6 +66,7 @@ export enum Services {
   subQuiz = 'sub_quiz_service',
   uniqueChoiceQuestion = 'unique_choice_question_services',
   trueFalseQuestion = 'true_false_question_services',
+  bookmark = 'bookmark_service',
 }
 
 export enum Roles {
@@ -103,6 +107,7 @@ export enum Routes {
   subQuizzes = 'sub_quizzes',
   uniqueChoiceQuestions = 'unique_choice_questions',
   trueFalseQuestions = 'true_false_questions',
+  bookmarks = 'bookmarks',
 }
 
 export enum Jobs {
