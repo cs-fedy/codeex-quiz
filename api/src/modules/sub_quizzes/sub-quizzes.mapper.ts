@@ -43,8 +43,6 @@ export default class SubQuizMapper implements IMapper<SubQuiz, SubQuizDTO> {
       domain.timeLimit,
       domain.dificulity,
       domain.coverImageURL,
-      domain.prevSubQuiz,
-      domain.nextSubQuiz,
     )
   }
 }

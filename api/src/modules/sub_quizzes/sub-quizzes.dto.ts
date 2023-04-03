@@ -10,7 +10,5 @@ export default class SubQuizDTO {
     public timeLimit: number,
     public dificulity: number,
     public coverImageURL?: string,
-    public prevSubQuiz?: string,
-    public nextSubQuiz?: string,
   ) {}
 }
