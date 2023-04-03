@@ -28,6 +28,7 @@ export default class QuizApprovalService implements IQuizApprovalService {
       isApproved: false,
       subQuizzesCount: 0,
       dificulity: 0,
+      points: 0,
     })
 
     await this.newQuizNotificationEvents.newQuizNotification({

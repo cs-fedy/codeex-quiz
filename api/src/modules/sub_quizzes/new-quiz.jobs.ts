@@ -20,11 +20,13 @@ export class NewSubQuizConsumer {
 
     const subQuizzes = await this.subQuizRepo.listQuizSubQuizzes(data.quizId)
     const totalDificulity = subQuizzes.reduce((prev, curr) => prev + curr.dificulity, 0)
+    const totalPoints = subQuizzes.reduce((prev, curr) => prev + curr.points, 0)
 
     await this.quizRepo.saveQuiz({
       ...existingQuiz,
       dificulity: totalDificulity / subQuizzes.length,
       subQuizzesCount: subQuizzes.length,
+      points: totalPoints,
     })
   }
 }

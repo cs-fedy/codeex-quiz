@@ -32,6 +32,7 @@ export default class AdminService implements IAdminService {
       isApproved: true,
       subQuizzesCount: 0,
       dificulity: 0,
+      points: 0,
     })
 
     const mappedQuiz = this.quizMapper.toDTO(createdQuiz)

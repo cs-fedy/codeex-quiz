@@ -30,6 +30,9 @@ export class Quiz extends Document {
 
   @Prop({ type: Number, default: 0 })
   dificulity: number
+
+  @Prop({ type: Number, default: 0 })
+  points: number
 }
 
 export const QuizSchema = SchemaFactory.createForClass(Quiz)
