@@ -113,6 +113,7 @@ export enum Routes {
   trueFalseQuestions = 'true_false_questions',
   bookmarks = 'bookmarks',
   enrolledQuizzes = 'enrolled_quizzes',
+  enrolledMultipleChoiceQuestions = 'enrolled_multiple_choice_questions',
 }
 
 export enum Jobs {
