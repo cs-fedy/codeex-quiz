@@ -15,6 +15,7 @@ import { SubQuizSchema } from './sub-quizzes.model'
 import SubQuizRepo from './sub-quizzes.repository'
 import SubQuizService from './sub-quizzes.services'
 
+// TODO: for each sub quiz module user can provide a color for each object. Otherwise default colors are provided
 const subQuizModel = MongooseModule.forFeature([{ name: Models.subQuizzes, schema: SubQuizSchema }])
 const newSubQuizQueue = BullModule.registerQueue({ name: Queues.newSubQuiz })
 

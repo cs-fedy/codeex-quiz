@@ -26,6 +26,7 @@ export enum Mappers {
   uniqueChoiceQuestion = 'unique_choice_question_mapper',
   trueFalseQuestion = 'true_false_question_mapper',
   bookmark = 'bookmark_mapper',
+  enrolledQuiz = 'enrolled_quiz_mapper',
 }
 
 export enum Repos {
@@ -43,6 +44,7 @@ export enum Repos {
   uniqueChoiceQuestion = 'unique_choice_question_repo',
   trueFalseQuestion = 'true_false_question_repo',
   bookmark = 'bookmark_repo',
+  enrolledQuiz = 'enrolled_quiz_repo',
 }
 
 export enum Services {
@@ -68,6 +70,7 @@ export enum Services {
   uniqueChoiceQuestion = 'unique_choice_question_services',
   trueFalseQuestion = 'true_false_question_services',
   bookmark = 'bookmark_service',
+  enrolledQuiz = 'enrolled_quiz_service',
 }
 
 export enum Roles {

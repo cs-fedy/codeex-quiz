@@ -11,6 +11,7 @@ import { CollectionSchema } from './collections.model'
 import CollectionRepo from './collections.repository'
 import CollectionService from './collections.services'
 
+// TODO: add quizzes per collection attributes
 const collectionModel = MongooseModule.forFeature([
   { name: Models.collections, schema: CollectionSchema },
 ])

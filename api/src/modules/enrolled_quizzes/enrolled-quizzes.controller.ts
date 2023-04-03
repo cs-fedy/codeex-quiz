@@ -1,9 +1,34 @@
-import { Controller, UseGuards } from '@nestjs/common'
+import {
+  Body,
+  Controller,
+  HttpException,
+  HttpStatus,
+  Inject,
+  Post,
+  Res,
+  UseGuards,
+} from '@nestjs/common'
+import { Response } from 'express'
 import AccountConfirmedGuard from 'src/guards/confirmed'
 import { RoleGuard } from 'src/guards/role'
-import { Roles, Routes } from 'src/utils/constants'
+import { Roles, Routes, Services } from 'src/utils/constants'
+import IEnrolledQuizService from './i-enrolled-quizzes.services'
+import EnrollQuizArgs from './validators/enroll-quiz'
 
 @Controller(Routes.enrolledQuizzes)
 @UseGuards(AccountConfirmedGuard())
 @UseGuards(RoleGuard(Roles.user))
-export default class EnrolledQuizController {}
+export default class EnrolledQuizController {
+  constructor(@Inject(Services.enrolledQuiz) private enrolledQuizService: IEnrolledQuizService) {}
+
+  @Post()
+  async enrollQuiz(@Body() args: EnrollQuizArgs, @Res() res: Response) {
+    const enrolledQuiz = await this.enrolledQuizService.enrollQuiz(args)
+    if (enrolledQuiz.isLeft()) {
+      const { code, message, status } = enrolledQuiz.error
+      throw new HttpException({ code, message }, status)
+    }
+
+    return res.status(HttpStatus.CREATED).json({ enrolledQuiz: enrolledQuiz.value })
+  }
+}
