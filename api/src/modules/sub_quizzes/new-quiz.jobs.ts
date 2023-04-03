@@ -19,6 +19,15 @@ export class NewSubQuizConsumer {
     if (!existingQuiz) return
 
     const subQuizzes = await this.subQuizRepo.listQuizSubQuizzes(data.quizId)
+
+    const previousLastCreatedSubQuiz = subQuizzes.find(
+      (subQuiz) => !!subQuiz.prevSubQuiz && !subQuiz.nextSubQuiz,
+    )
+
+    const createdSubQuiz = subQuizzes.find(
+      (subQuiz) => !subQuiz.prevSubQuiz && !subQuiz.nextSubQuiz,
+    )
+
     const totalDificulity = subQuizzes.reduce((prev, curr) => prev + curr.dificulity, 0)
     const totalPoints = subQuizzes.reduce((prev, curr) => prev + curr.points, 0)
 
@@ -28,5 +37,17 @@ export class NewSubQuizConsumer {
       subQuizzesCount: subQuizzes.length,
       points: totalPoints,
     })
+
+    if (previousLastCreatedSubQuiz && createdSubQuiz) {
+      await this.subQuizRepo.updateSubQuizById(data.subQuizId, {
+        ...createdSubQuiz,
+        prevSubQuiz: previousLastCreatedSubQuiz.subQuizId,
+      })
+
+      await this.subQuizRepo.updateSubQuizById(data.subQuizId, {
+        ...previousLastCreatedSubQuiz,
+        nextSubQuiz: createdSubQuiz.subQuizId,
+      })
+    }
   }
 }

@@ -20,4 +20,14 @@ export default class SubQuizRepo implements ISubQuizRepo {
     const mappedSubQuizzes = subQuizzes.map(this.subQuizMapper.toDomain)
     return mappedSubQuizzes
   }
+
+  async updateSubQuizById(subQuizId: string, args: SubQuiz): Promise<SubQuiz | null> {
+    const updatedSubQuiz = await this.subQuizModel.findByIdAndUpdate(
+      subQuizId,
+      this.subQuizMapper.toPersistence(args),
+      { new: true },
+    )
+
+    return updatedSubQuiz ? this.subQuizMapper.toDomain(updatedSubQuiz) : null
+  }
 }
