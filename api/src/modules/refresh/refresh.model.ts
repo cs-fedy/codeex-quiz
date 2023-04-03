@@ -1,7 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
 import mongoose, { HydratedDocument } from 'mongoose'
 import { Models } from 'src/utils/constants'
-import User from '../users/users.domain'
+import { User } from '../users/users.model'
 
 export type RefreshDocument = HydratedDocument<Refresh>
 

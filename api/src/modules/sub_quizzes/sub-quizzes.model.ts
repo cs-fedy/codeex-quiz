@@ -1,8 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
 import mongoose, { Document, HydratedDocument } from 'mongoose'
 import { Models } from 'src/utils/constants'
-import Quiz from '../quizzes/quizzes.domain'
-import DSubQuiz from './sub-quizzes.domain'
+import { Quiz } from '../quizzes/quizzes.model'
 
 export type SubQuizDocument = HydratedDocument<SubQuiz>
 
@@ -34,10 +33,10 @@ export class SubQuiz extends Document {
   dificulity: number
 
   @Prop({ type: mongoose.Types.ObjectId, ref: Models.subQuizzes })
-  prevSubQuizId?: DSubQuiz | string
+  prevSubQuizId?: SubQuiz | string
 
   @Prop({ type: mongoose.Types.ObjectId, ref: Models.subQuizzes })
-  nextSubQuizId?: DSubQuiz | string
+  nextSubQuizId?: SubQuiz | string
 }
 
 export const SubQuizSchema = SchemaFactory.createForClass(SubQuiz)

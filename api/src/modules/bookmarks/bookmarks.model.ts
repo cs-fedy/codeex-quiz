@@ -1,8 +1,8 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
 import mongoose, { HydratedDocument } from 'mongoose'
 import { Models } from 'src/utils/constants'
-import Quiz from '../quizzes/quizzes.domain'
-import User from '../users/users.domain'
+import { Quiz } from '../quizzes/quizzes.model'
+import { User } from '../users/users.model'
 
 export type BookmarkDocument = HydratedDocument<Bookmark>
 

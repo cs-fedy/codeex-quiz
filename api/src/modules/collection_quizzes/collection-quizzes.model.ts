@@ -1,8 +1,8 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
 import mongoose, { HydratedDocument } from 'mongoose'
 import { Models } from 'src/utils/constants'
-import Quiz from '../quizzes/quizzes.domain'
-import Collection from './collection-quizzes.domain'
+import { Collection } from '../collections/collections.model'
+import { Quiz } from '../quizzes/quizzes.model'
 
 export type CollectionQuizDocument = HydratedDocument<CollectionQuiz>
 

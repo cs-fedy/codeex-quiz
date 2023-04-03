@@ -11,6 +11,7 @@ export enum Models {
   trueFalseQuestion = 'true_false_questions',
   subQuizzes = 'sub_quizzes',
   bookmarks = 'bookmarks',
+  enrolledQuizzes = 'enrolled_quizzes',
 }
 
 export enum Mappers {
@@ -108,6 +109,7 @@ export enum Routes {
   uniqueChoiceQuestions = 'unique_choice_questions',
   trueFalseQuestions = 'true_false_questions',
   bookmarks = 'bookmarks',
+  enrolledQuizzes = 'enrolled_quizzes',
 }
 
 export enum Jobs {

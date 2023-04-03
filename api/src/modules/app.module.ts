@@ -8,6 +8,7 @@ import AuthModule from './auth/auth.module'
 import BookmarksModule from './bookmarks/bookmarks.module'
 import CollectionQuizzesModule from './collection_quizzes/collection-quizzes.module'
 import CollectionsModule from './collections/collections.module'
+import EnrolledQuizzesModule from './enrolled_quizzes/enrolled-quizzes.module'
 import MultipleChoiceQuestionsModule from './multiple_choice_questions/multiple-choice-questions.module'
 import NotificationsModule from './notifications/notifications.module'
 import ProfilesModule from './profiles/profiles.module'
@@ -52,6 +53,7 @@ const bullConnection = BullModule.forRoot({
     UniqueChoiceQuestionsModule,
     TrueFalseQuestionsModule,
     BookmarksModule,
+    EnrolledQuizzesModule,
   ],
 })
 export default class AppModule {}
