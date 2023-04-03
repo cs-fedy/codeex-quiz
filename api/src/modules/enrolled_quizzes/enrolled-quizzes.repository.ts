@@ -37,4 +37,9 @@ export default class EnrolledQuizRepo implements IEnrolledQuizRepo {
     const mappedQuizzes = quizzes.map(this.enrolledQuizMapper.toDomain)
     return mappedQuizzes
   }
+
+  async getEnrolledQuiz(userId: string, quizId: string): Promise<EnrolledQuiz | null> {
+    const enrolledQuiz = await this.enrolledQuizModel.findOne({ userId, quizId })
+    return enrolledQuiz ? this.enrolledQuizMapper.toDomain(enrolledQuiz) : null
+  }
 }

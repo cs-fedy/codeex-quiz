@@ -9,6 +9,8 @@ import IEnrolledQuizRepo from './i-enrolled-quizzes.repository'
 import IEnrolledQuizService, {
   EnrollQuizArgs,
   EnrolledQuizResult,
+  GetEnrolledQuizArgs,
+  GetEnrolledQuizResult,
   ListEnrolledQuizzesResult,
 } from './i-enrolled-quizzes.services'
 
@@ -59,5 +61,18 @@ export default class EnrolledQuizService implements IEnrolledQuizService {
     const quizzes = await this.enrolledQuizRepo.listEnrolledQuizzes(userId)
     const mappedQuizzes = quizzes.map(this.enrolledQuizMapper.toDTO)
     return Right.create(mappedQuizzes)
+  }
+
+  async getEnrolledQuiz(args: GetEnrolledQuizArgs): Promise<GetEnrolledQuizResult> {
+    const enrolledQuiz = await this.enrolledQuizRepo.getEnrolledQuiz(args.userId, args.quizId)
+    if (!enrolledQuiz)
+      return Left.create({
+        code: 'quiz_not_enrolled',
+        status: HttpStatus.BAD_REQUEST,
+        message: 'quiz not enrolled',
+      })
+
+    const mappedEnrolledQuiz = this.enrolledQuizMapper.toDTO(enrolledQuiz)
+    return Right.create(mappedEnrolledQuiz)
   }
 }

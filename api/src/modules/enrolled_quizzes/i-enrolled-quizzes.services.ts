@@ -21,7 +21,21 @@ export type EnrolledQuizResult = Either<
 
 export type ListEnrolledQuizzesResult = Either<never, Array<EnrolledQuizDTO>>
 
+export type GetEnrolledQuizArgs = {
+  quizId: string
+  userId: string
+}
+
+type QuizNotEnrolled = {
+  code: 'quiz_not_enrolled'
+  status: HttpStatus.BAD_REQUEST
+  message: string
+}
+
+export type GetEnrolledQuizResult = Either<QuizNotEnrolled, EnrolledQuizDTO>
+
 export default interface IEnrolledQuizService {
   enrollQuiz(args: EnrollQuizArgs): Promise<EnrolledQuizResult>
   listEnrolledQuizzes(userId: string): Promise<ListEnrolledQuizzesResult>
+  getEnrolledQuiz(args: GetEnrolledQuizArgs): Promise<GetEnrolledQuizResult>
 }

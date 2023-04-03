@@ -5,6 +5,7 @@ import {
   HttpException,
   HttpStatus,
   Inject,
+  Param,
   Post,
   Res,
   UseGuards,
@@ -39,5 +40,16 @@ export default class EnrolledQuizController {
     if (enrolledQuizzes.isRight()) {
       return { enrolledQuizzes: enrolledQuizzes.value }
     }
+  }
+
+  @Get(':quizId')
+  async getEnrolledQuiz(@Body('userId') userId: string, @Param('quizId') quizId: string) {
+    const enrolledQuiz = await this.enrolledQuizService.getEnrolledQuiz({ userId, quizId })
+    if (enrolledQuiz.isLeft()) {
+      const { message, code, status } = enrolledQuiz.error
+      throw new HttpException({ message, code }, status)
+    }
+
+    return { enrolledQuiz: enrolledQuiz.value }
   }
 }
