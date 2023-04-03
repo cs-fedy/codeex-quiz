@@ -9,6 +9,7 @@ import IEnrolledQuizRepo from './i-enrolled-quizzes.repository'
 import IEnrolledQuizService, {
   EnrollQuizArgs,
   EnrolledQuizResult,
+  ListEnrolledQuizzesResult,
 } from './i-enrolled-quizzes.services'
 
 @Injectable()
@@ -52,5 +53,11 @@ export default class EnrolledQuizService implements IEnrolledQuizService {
 
     const mappedEnrolledQuiz = this.enrolledQuizMapper.toDTO(enrolledQuiz)
     return Right.create(mappedEnrolledQuiz)
+  }
+
+  async listEnrolledQuizzes(userId: string): Promise<ListEnrolledQuizzesResult> {
+    const quizzes = await this.enrolledQuizRepo.listEnrolledQuizzes(userId)
+    const mappedQuizzes = quizzes.map(this.enrolledQuizMapper.toDTO)
+    return Right.create(mappedQuizzes)
   }
 }

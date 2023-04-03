@@ -19,6 +19,9 @@ export type EnrolledQuizResult = Either<
   EnrolledQuizDTO
 >
 
+export type ListEnrolledQuizzesResult = Either<never, Array<EnrolledQuizDTO>>
+
 export default interface IEnrolledQuizService {
   enrollQuiz(args: EnrollQuizArgs): Promise<EnrolledQuizResult>
+  listEnrolledQuizzes(userId: string): Promise<ListEnrolledQuizzesResult>
 }

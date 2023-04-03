@@ -31,4 +31,10 @@ export default class EnrolledQuizRepo implements IEnrolledQuizRepo {
     const enrolledQuiz = await this.enrolledQuizModel.findOne({ userId, quizId })
     return !!enrolledQuiz
   }
+
+  async listEnrolledQuizzes(userId: string): Promise<Array<EnrolledQuiz>> {
+    const quizzes = await this.enrolledQuizModel.find({ userId })
+    const mappedQuizzes = quizzes.map(this.enrolledQuizMapper.toDomain)
+    return mappedQuizzes
+  }
 }
