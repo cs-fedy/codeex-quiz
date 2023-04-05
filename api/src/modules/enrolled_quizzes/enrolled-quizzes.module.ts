@@ -24,6 +24,7 @@ const enrolledQuizzesModel = MongooseModule.forFeature([
     { provide: Repos.enrolledQuiz, useClass: EnrolledQuizRepo },
     { provide: Services.enrolledQuiz, useClass: EnrolledQuizService },
   ],
+  exports: [{ provide: Repos.enrolledQuiz, useClass: EnrolledQuizRepo }],
 })
 export default class EnrolledQuizzesModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {

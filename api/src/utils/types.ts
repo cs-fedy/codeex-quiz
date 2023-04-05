@@ -83,3 +83,9 @@ export type NotQuizOwner = {
   status: HttpStatus.FORBIDDEN
   message: string
 }
+
+export type QuizNotEnrolled = {
+  code: 'quiz_not_enrolled'
+  status: HttpStatus.BAD_REQUEST
+  message: string
+}

@@ -1,6 +1,6 @@
 import { HttpStatus } from '@nestjs/common'
 import Either from 'src/utils/either'
-import { QuizNotAvailable, QuizNotFound } from 'src/utils/types'
+import { QuizNotAvailable, QuizNotEnrolled, QuizNotFound } from 'src/utils/types'
 import EnrolledQuizDTO from './enrolled-quizzes.dto'
 
 export type EnrollQuizArgs = {
@@ -24,12 +24,6 @@ export type ListEnrolledQuizzesResult = Either<never, Array<EnrolledQuizDTO>>
 export type GetEnrolledQuizArgs = {
   quizId: string
   userId: string
-}
-
-type QuizNotEnrolled = {
-  code: 'quiz_not_enrolled'
-  status: HttpStatus.BAD_REQUEST
-  message: string
 }
 
 export type GetEnrolledQuizResult = Either<QuizNotEnrolled, EnrolledQuizDTO>

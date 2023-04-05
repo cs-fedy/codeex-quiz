@@ -10,6 +10,7 @@ import CollectionQuizzesModule from './collection_quizzes/collection-quizzes.mod
 import CollectionsModule from './collections/collections.module'
 import EnrolledMultipleChoiceQuestionsModule from './enrolled_multiple_choice_questions/enrolled-multiple-choice-questions.module'
 import EnrolledQuizzesModule from './enrolled_quizzes/enrolled-quizzes.module'
+import EnrolledSubQuizzesModule from './enrolled_sub_quizzes/enrolled-sub-quizzes.module'
 import MultipleChoiceQuestionsModule from './multiple_choice_questions/multiple-choice-questions.module'
 import NotificationsModule from './notifications/notifications.module'
 import ProfilesModule from './profiles/profiles.module'
@@ -55,6 +56,7 @@ const bullConnection = BullModule.forRoot({
     TrueFalseQuestionsModule,
     BookmarksModule,
     EnrolledQuizzesModule,
+    EnrolledSubQuizzesModule,
     EnrolledMultipleChoiceQuestionsModule,
   ],
 })
