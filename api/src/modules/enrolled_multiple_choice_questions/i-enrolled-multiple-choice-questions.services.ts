@@ -66,7 +66,19 @@ export type CompleteSubQuizResult = Either<
   CompleteSubQuizPayload
 >
 
+export type GetEnrolledSubQuizArgs = {
+  userId: string
+  quizId: string
+  subQuizId: string
+}
+
+export type GetEnrolledSubQuizResult = Either<
+  QuizNotFound | QuizNotAvailable | InvalidSubQuiz | SubQuizNotFound | SubQuizNotStarted,
+  EnrolledMultipleChoiceQuestionDTO
+>
+
 export default interface IEnrolledMultipleChoiceQuestionService {
   startSubQuiz(args: StartSubQuizArgs): Promise<StartSubQuizResult>
   completeSubQuiz(args: CompleteSubQuizArgs): Promise<CompleteSubQuizResult>
+  getEnrolledSubQuiz(args: GetEnrolledSubQuizArgs): Promise<GetEnrolledSubQuizResult>
 }

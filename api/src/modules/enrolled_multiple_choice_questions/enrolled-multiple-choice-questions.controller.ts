@@ -1,9 +1,11 @@
 import {
   Body,
   Controller,
+  Get,
   HttpException,
   HttpStatus,
   Inject,
+  Param,
   Post,
   Res,
   UseGuards,
@@ -25,7 +27,7 @@ export default class EnrolledMultipleChoiceQuestionController {
     private enrolledMultipleChoiceQuestionService: IEnrolledMultipleChoiceQuestionService,
   ) {}
 
-  @Post()
+  @Post(Routes.start)
   async startSubQuiz(@Body() args: StartSubQuizArgs, @Res() res: Response) {
     const startedSubQuiz = await this.enrolledMultipleChoiceQuestionService.startSubQuiz(args)
     if (startedSubQuiz.isLeft()) {
@@ -36,7 +38,7 @@ export default class EnrolledMultipleChoiceQuestionController {
     return res.status(HttpStatus.CREATED).json({ startedSubQuiz: startedSubQuiz.value })
   }
 
-  @Post()
+  @Post(Routes.complete)
   async completeSubQuiz(@Body() args: CompleteSubQuizArgs) {
     const completedSubQuiz = await this.enrolledMultipleChoiceQuestionService.completeSubQuiz(args)
     if (completedSubQuiz.isLeft()) {
@@ -45,5 +47,25 @@ export default class EnrolledMultipleChoiceQuestionController {
     }
 
     return { completedSubQuiz: completedSubQuiz.value }
+  }
+
+  @Get(':subQuizId/quizzes/:quizId')
+  async getEnrolledSubQuiz(
+    @Param('subQuizId') subQuizId: string,
+    @Param('quizId') quizId: string,
+    @Body('userId') userId: string,
+  ) {
+    const enrolledSubQuiz = await this.enrolledMultipleChoiceQuestionService.getEnrolledSubQuiz({
+      subQuizId,
+      quizId,
+      userId,
+    })
+
+    if (enrolledSubQuiz.isLeft()) {
+      const { message, code, status } = enrolledSubQuiz.error
+      throw new HttpException({ message, code }, status)
+    }
+
+    return { enrolledSubQuiz: enrolledSubQuiz.value }
   }
 }

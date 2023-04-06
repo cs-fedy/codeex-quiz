@@ -17,6 +17,8 @@ import IEnrolledMultipleChoiceQuestionRepo from './i-enrolled-multiple-choice-qu
 import IEnrolledMultipleChoiceQuestionService, {
   CompleteSubQuizArgs,
   CompleteSubQuizResult,
+  GetEnrolledSubQuizArgs,
+  GetEnrolledSubQuizResult,
   StartSubQuizArgs,
   StartSubQuizResult,
 } from './i-enrolled-multiple-choice-questions.services'
@@ -205,5 +207,53 @@ export default class EnrolledMultipleChoiceQuestionService
             completionTime,
           },
     )
+  }
+
+  async getEnrolledSubQuiz(args: GetEnrolledSubQuizArgs): Promise<GetEnrolledSubQuizResult> {
+    const existingQuiz = await this.quizRepo.getQuizById(args.quizId)
+    if (!existingQuiz)
+      return Left.create({
+        code: 'quiz_not_found',
+        status: HttpStatus.NOT_FOUND,
+        message: 'quiz not found',
+      })
+
+    if (!existingQuiz.isApproved || !existingQuiz.isVisible)
+      return Left.create({
+        code: 'quiz_not_available',
+        status: HttpStatus.BAD_REQUEST,
+        message: 'quiz not available',
+      })
+
+    const existingMultipleChoiceQuestion =
+      await this.multipleChoiceQuestionRepo.getMultipleChoiceQuestion(args.subQuizId)
+
+    if (!existingMultipleChoiceQuestion)
+      return Left.create({
+        code: 'sub_quiz_not_found',
+        status: HttpStatus.NOT_FOUND,
+        message: 'multiple choice question sub quiz not found',
+      })
+
+    const existingEnrolledMultipleChoiceQuestion =
+      await this.enrolledMultipleChoiceQuestionRepo.getEnrolledMultipleChoiceQuestion(
+        args.userId,
+        args.quizId,
+        args.subQuizId,
+      )
+
+    if (!existingEnrolledMultipleChoiceQuestion)
+      return Left.create({
+        code: 'sub_quiz_not_started',
+        status: HttpStatus.BAD_REQUEST,
+        message: 'sub quiz not started',
+      })
+
+    const mappedEnrolledSubQuiz = this.enrolledMultipleChoiceQuestionMapper.toDTO({
+      ...existingEnrolledMultipleChoiceQuestion,
+      subQuizId: existingMultipleChoiceQuestion,
+    })
+
+    return Right.create(mappedEnrolledSubQuiz)
   }
 }

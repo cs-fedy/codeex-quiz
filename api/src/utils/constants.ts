@@ -125,6 +125,8 @@ export enum Routes {
   enrolledQuizzes = 'enrolled_quizzes',
   enrolledMultipleChoiceQuestions = 'enrolled_multiple_choice_questions',
   enrolledSubQuizzes = 'enrolled_sub_quizzes',
+  start = 'start',
+  complete = 'complete',
 }
 
 export enum Jobs {
