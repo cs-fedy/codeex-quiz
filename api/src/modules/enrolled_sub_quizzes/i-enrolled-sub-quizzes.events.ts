@@ -1,0 +1,9 @@
+export type NewEnrolledSubQuizArgs = {
+  userId: string
+  quizId: string
+  subQuizId: string
+}
+
+export default interface IEnrolledSubQuizzesEvents {
+  newEnrolledSubQuiz(args: NewEnrolledSubQuizArgs): Promise<void>
+}

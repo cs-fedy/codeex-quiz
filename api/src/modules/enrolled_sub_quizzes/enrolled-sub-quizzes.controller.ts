@@ -5,7 +5,7 @@ import { Roles, Routes, Services } from 'src/utils/constants'
 import IEnrolledSubQuizService from './i-enrolled-sub-quizzes.services'
 
 @Controller(Routes.enrolledSubQuizzes)
-@UseGuards(AccountConfirmedGuard)
+@UseGuards(AccountConfirmedGuard())
 @UseGuards(RoleGuard(Roles.user))
 export default class EnrolledSubQuizController {
   constructor(
