@@ -13,6 +13,7 @@ import AccountConfirmedGuard from 'src/guards/confirmed'
 import { RoleGuard } from 'src/guards/role'
 import { Roles, Routes, Services } from 'src/utils/constants'
 import IEnrolledMultipleChoiceQuestionService from './i-enrolled-multiple-choice-questions.services'
+import CompleteSubQuizArgs from './validators/complete-sub-quiz'
 import StartSubQuizArgs from './validators/start-sub-quiz'
 
 @Controller(Routes.enrolledMultipleChoiceQuestions)
@@ -33,5 +34,16 @@ export default class EnrolledMultipleChoiceQuestionController {
     }
 
     return res.status(HttpStatus.CREATED).json({ startedSubQuiz: startedSubQuiz.value })
+  }
+
+  @Post()
+  async completeSubQuiz(@Body() args: CompleteSubQuizArgs) {
+    const completedSubQuiz = await this.enrolledMultipleChoiceQuestionService.completeSubQuiz(args)
+    if (completedSubQuiz.isLeft()) {
+      const { message, code, status } = completedSubQuiz.error
+      throw new HttpException({ message, code }, status)
+    }
+
+    return { completedSubQuiz: completedSubQuiz.value }
   }
 }

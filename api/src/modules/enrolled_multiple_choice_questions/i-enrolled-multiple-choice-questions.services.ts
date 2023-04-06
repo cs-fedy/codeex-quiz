@@ -38,6 +38,35 @@ export type StartSubQuizResult = Either<
   EnrolledMultipleChoiceQuestionDTO
 >
 
+export type CompleteSubQuizArgs = {
+  userId: string
+  quizId: string
+  subQuizId: string
+  userAnswer: Array<number>
+}
+
+type SubQuizNotStarted = {
+  code: 'sub_quiz_not_started'
+  status: HttpStatus.BAD_REQUEST
+  message: string
+}
+
+type CompleteSubQuizPayload =
+  | { answerCorrectness: true }
+  | {
+      answerCorrectness: false
+      userAnswer: Array<number>
+      expectedAnswer: Array<number>
+      points: number
+      completionTime: number
+    }
+
+export type CompleteSubQuizResult = Either<
+  QuizNotFound | QuizNotAvailable | SubQuizNotFound | SubQuizNotStarted,
+  CompleteSubQuizPayload
+>
+
 export default interface IEnrolledMultipleChoiceQuestionService {
   startSubQuiz(args: StartSubQuizArgs): Promise<StartSubQuizResult>
+  completeSubQuiz(args: CompleteSubQuizArgs): Promise<CompleteSubQuizResult>
 }

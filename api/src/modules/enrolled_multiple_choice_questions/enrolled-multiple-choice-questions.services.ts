@@ -1,4 +1,6 @@
 import { HttpStatus, Inject, Injectable } from '@nestjs/common'
+import * as _ from 'lodash'
+import * as moment from 'moment'
 import IMapper from 'src/common/mapper'
 import { Mappers, Repos } from 'src/utils/constants'
 import { Left, Right } from 'src/utils/either'
@@ -13,6 +15,8 @@ import EnrolledMultipleChoiceQuestion from './enrolled-multiple-choice-questions
 import EnrolledMultipleChoiceQuestionDTO from './enrolled-multiple-choice-questions.dto'
 import IEnrolledMultipleChoiceQuestionRepo from './i-enrolled-multiple-choice-questions.repository'
 import IEnrolledMultipleChoiceQuestionService, {
+  CompleteSubQuizArgs,
+  CompleteSubQuizResult,
   StartSubQuizArgs,
   StartSubQuizResult,
 } from './i-enrolled-multiple-choice-questions.services'
@@ -128,5 +132,78 @@ export default class EnrolledMultipleChoiceQuestionService
     })
 
     return Right.create(mappedStartedSubQuiz)
+  }
+
+  async completeSubQuiz(args: CompleteSubQuizArgs): Promise<CompleteSubQuizResult> {
+    const existingQuiz = await this.quizRepo.getQuizById(args.quizId)
+    if (!existingQuiz)
+      return Left.create({
+        code: 'quiz_not_found',
+        status: HttpStatus.NOT_FOUND,
+        message: 'quiz not found',
+      })
+
+    if (!existingQuiz.isApproved || !existingQuiz.isVisible)
+      return Left.create({
+        code: 'quiz_not_available',
+        status: HttpStatus.BAD_REQUEST,
+        message: 'quiz not available',
+      })
+
+    const existingMultipleChoiceQuestion =
+      await this.multipleChoiceQuestionRepo.getMultipleChoiceQuestion(args.subQuizId)
+
+    if (!existingMultipleChoiceQuestion)
+      return Left.create({
+        code: 'sub_quiz_not_found',
+        status: HttpStatus.NOT_FOUND,
+        message: 'multiple choice question sub quiz not found',
+      })
+
+    const existingEnrolledMultipleChoiceQuestion =
+      await this.enrolledMultipleChoiceQuestionRepo.getEnrolledMultipleChoiceQuestion(
+        args.userId,
+        args.quizId,
+        args.subQuizId,
+      )
+
+    if (!existingEnrolledMultipleChoiceQuestion)
+      return Left.create({
+        code: 'sub_quiz_not_started',
+        status: HttpStatus.BAD_REQUEST,
+        message: 'sub quiz not started',
+      })
+
+    const completionTime =
+      (moment(existingEnrolledMultipleChoiceQuestion.createdAt).valueOf() - moment().valueOf()) /
+      1000
+
+    const isUserAnswerCorrect = _.isEqual(
+      _.sortedUniq(args.userAnswer),
+      _.sortedUniq(existingMultipleChoiceQuestion.idealOptions),
+    )
+
+    const reward = isUserAnswerCorrect ? existingMultipleChoiceQuestion.points : 0
+
+    await this.enrolledMultipleChoiceQuestionRepo.saveEnrolledMultipleChoiceQuestion({
+      ...args,
+      ...existingEnrolledMultipleChoiceQuestion,
+      points: reward,
+      isCompleted: true,
+      answerCorrectness: isUserAnswerCorrect,
+      completionTime,
+    })
+
+    return Right.create(
+      isUserAnswerCorrect
+        ? { answerCorrectness: true }
+        : {
+            answerCorrectness: false,
+            userAnswer: args.userAnswer,
+            expectedAnswer: existingMultipleChoiceQuestion.idealOptions,
+            points: reward,
+            completionTime,
+          },
+    )
   }
 }
