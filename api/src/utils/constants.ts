@@ -80,6 +80,7 @@ export enum Services {
   bookmark = 'bookmark_service',
   enrolledQuiz = 'enrolled_quiz_service',
   enrolledSubQuiz = 'enrolled_sub_quiz_service',
+  enrolledMultipleChoiceQuestion = 'enrolled_multiple_choice_question_service',
 }
 
 export enum Roles {

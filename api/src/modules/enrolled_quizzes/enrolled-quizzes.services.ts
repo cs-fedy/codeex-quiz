@@ -40,7 +40,7 @@ export default class EnrolledQuizService implements IEnrolledQuizService {
       })
 
     const isEnrolled = await this.enrolledQuizRepo.isEnrolled(args.userId, args.quizId)
-    if (!isEnrolled)
+    if (isEnrolled)
       return Left.create({
         code: 'quiz_already_started',
         status: HttpStatus.BAD_REQUEST,

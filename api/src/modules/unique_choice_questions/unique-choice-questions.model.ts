@@ -2,6 +2,7 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
 import { Document, HydratedDocument } from 'mongoose'
 import { Models } from 'src/utils/constants'
 import Quiz from '../quizzes/quizzes.domain'
+import { SubQuiz } from '../sub_quizzes/sub-quizzes.model'
 
 export type UniqueChoiceQuestionDocument = HydratedDocument<UniqueChoiceQuestion>
 
@@ -14,6 +15,8 @@ export class UniqueChoiceQuestion extends Document {
   points: number
   timeLimit: number
   dificulity: number
+  prevSubQuizId?: SubQuiz | string
+  nextSubQuizId?: SubQuiz | string
 
   @Prop([String])
   options: Array<string>

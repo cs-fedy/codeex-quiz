@@ -1,6 +1,6 @@
-import SubQuiz, { SubQuizTypes } from '../sub_quizzes/sub-quizzes.domain'
+import { SubQuizTypes } from '../sub_quizzes/sub-quizzes.domain'
 
-export default class MultipleChoiceQuestion implements SubQuiz {
+export default class MultipleChoiceQuestion {
   constructor(
     public subQuizId: string,
     public type: SubQuizTypes,
@@ -12,5 +12,7 @@ export default class MultipleChoiceQuestion implements SubQuiz {
     public timeLimit: number,
     public dificulity: number,
     public coverImageURL?: string,
+    public prevSubQuiz?: string,
+    public nextSubQuiz?: string,
   ) {}
 }

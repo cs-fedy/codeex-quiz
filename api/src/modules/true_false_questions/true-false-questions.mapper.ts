@@ -18,6 +18,8 @@ export default class TrueFalseQuestionMapper
       raw.timeLimit,
       raw.dificulity,
       raw.coverImageURL,
+      raw.prevSubQuizId,
+      raw.nextSubQuizId,
     )
   }
 
@@ -32,6 +34,8 @@ export default class TrueFalseQuestionMapper
       timeLimit: domain.timeLimit,
       dificulity: domain.dificulity,
       coverImageURL: domain.coverImageURL,
+      prevSubQuizId: domain.prevSubQuizId,
+      nextSubQuizId: domain.nextSubQuizId,
     }
   }
 
@@ -46,6 +50,8 @@ export default class TrueFalseQuestionMapper
       domain.timeLimit,
       domain.dificulity,
       domain.coverImageURL,
+      domain.prevSubQuizId,
+      domain.nextSubQuizId,
     )
   }
 }

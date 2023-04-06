@@ -39,7 +39,10 @@ const newEnrolledSubQuizQueue = BullModule.registerQueue({ name: Queues.newEnrol
     { provide: Events.enrolledSubQuiz, useClass: EnrolledSubQuizEvents },
     { provide: Jobs.newEnrolledSubQuiz, useClass: NewEnrolledSubQuizConsumer },
   ],
-  exports: [{ provide: Events.enrolledSubQuiz, useClass: EnrolledSubQuizEvents }],
+  exports: [
+    { provide: Events.enrolledSubQuiz, useClass: EnrolledSubQuizEvents },
+    { provide: Repos.enrolledSubQuiz, useClass: EnrolledSubQuizRepo },
+  ],
 })
 export default class EnrolledSubQuizzesModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {

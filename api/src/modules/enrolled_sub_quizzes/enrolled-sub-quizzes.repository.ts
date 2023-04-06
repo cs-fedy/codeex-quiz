@@ -22,4 +22,20 @@ export default class EnrolledSubQuizRepo implements IEnrolledSubQuizRepo {
     const mappedEnrolledSubQuizzes = enrolledSubQuizzes.map(this.enrolledSubQuizMapper.toDomain)
     return mappedEnrolledSubQuizzes
   }
+
+  async getEnrolledSubQuizMetadata(
+    userId: string,
+    quizId: string,
+    subQuizId: string,
+  ): Promise<EnrolledSubQuiz | null> {
+    const existingEnrolledSubQuiz = await this.enrolledSubQuizModel.findOne({
+      userId,
+      quizId,
+      subQuizId,
+    })
+
+    return existingEnrolledSubQuiz
+      ? this.enrolledSubQuizMapper.toDomain(existingEnrolledSubQuiz)
+      : null
+  }
 }

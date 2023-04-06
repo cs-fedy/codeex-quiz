@@ -31,6 +31,7 @@ const multipleChoiceQuestionModel = MongooseModule.forFeature([
     { provide: Repos.multipleChoiceQuestion, useClass: MultipleChoiceQuestionRepo },
     { provide: Services.multipleChoiceQuestion, useClass: MultipleChoiceQuestionService },
   ],
+  exports: [{ provide: Repos.multipleChoiceQuestion, useClass: MultipleChoiceQuestionRepo }],
 })
 export default class MultipleChoiceQuestionsModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
