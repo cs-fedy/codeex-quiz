@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
-import mongoose, { HydratedDocument } from 'mongoose'
+import mongoose, { HydratedDocument, now } from 'mongoose'
 import { Models } from 'src/utils/constants'
 import { MultipleChoiceQuestion } from '../multiple_choice_questions/multiple-choice-questions.model'
 import { Quiz } from '../quizzes/quizzes.model'
@@ -9,7 +9,7 @@ import { User } from '../users/users.model'
 
 export type EnrolledSubQuizDocument = HydratedDocument<EnrolledSubQuiz>
 
-@Schema({ discriminatorKey: '__type' })
+@Schema({ discriminatorKey: '__type', timestamps: true })
 export class EnrolledSubQuiz {
   @Prop({
     type: String,
@@ -49,6 +49,9 @@ export class EnrolledSubQuiz {
 
   @Prop({ type: Number, min: -1 })
   completionTime: number
+
+  @Prop({ type: Date, default: now() })
+  createdAt: Date
 }
 
 export const EnrolledSubQuizSchema = SchemaFactory.createForClass(EnrolledSubQuiz)

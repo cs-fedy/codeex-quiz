@@ -11,5 +11,6 @@ export default class EnrolledSubQuizDTO {
     public isCompleted: boolean,
     public answerCorrectness: boolean,
     public completionTime: number,
+    public createdAt: Date,
   ) {}
 }

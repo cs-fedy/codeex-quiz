@@ -16,6 +16,7 @@ export default class EnrolledSubQuizMapper implements IMapper<EnrolledSubQuiz, E
       raw.isCompleted,
       raw.answerCorrectness,
       raw.completionTime,
+      raw.createdAt,
     )
   }
 
@@ -30,6 +31,7 @@ export default class EnrolledSubQuizMapper implements IMapper<EnrolledSubQuiz, E
       isCompleted: domain.isCompleted,
       answerCorrectness: domain.answerCorrectness,
       completionTime: domain.completionTime,
+      createdAt: domain.createdAt,
     }
   }
 
@@ -44,6 +46,7 @@ export default class EnrolledSubQuizMapper implements IMapper<EnrolledSubQuiz, E
       domain.isCompleted,
       domain.answerCorrectness,
       domain.completionTime,
+      domain.createdAt,
     )
   }
 }

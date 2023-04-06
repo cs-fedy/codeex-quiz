@@ -32,6 +32,7 @@ export enum Mappers {
   bookmark = 'bookmark_mapper',
   enrolledQuiz = 'enrolled_quiz_mapper',
   enrolledSubQuiz = 'enrolled_sub_quiz_mapper',
+  enrolledMultipleChoiceQuestion = 'enrolled_multiple_choice_question_mapper',
 }
 
 export enum Repos {
@@ -51,6 +52,7 @@ export enum Repos {
   bookmark = 'bookmark_repo',
   enrolledQuiz = 'enrolled_quiz_repo',
   enrolledSubQuiz = 'enrolled_sub_quiz_repo',
+  enrolledMultipleChoiceQuestion = 'enrolled_multiple_choice_question',
 }
 
 export enum Services {

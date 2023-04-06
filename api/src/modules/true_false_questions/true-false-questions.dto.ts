@@ -1,6 +1,7 @@
-import SubQuiz, { SubQuizTypes } from '../sub_quizzes/sub-quizzes.domain'
+import { SubQuizTypes } from '../sub_quizzes/sub-quizzes.domain'
+import SubQuizDTO from '../sub_quizzes/sub-quizzes.dto'
 
-export default class TrueFalseQuestionDTO implements SubQuiz {
+export default class TrueFalseQuestionDTO implements SubQuizDTO {
   constructor(
     public subQuizId: string,
     public type: SubQuizTypes,
