@@ -1,5 +1,4 @@
 import { HttpStatus, Inject, Injectable } from '@nestjs/common'
-import * as _ from 'lodash'
 import * as moment from 'moment'
 import IMapper from 'src/common/mapper'
 import { Events, Mappers, Repos } from 'src/utils/constants'
@@ -9,37 +8,37 @@ import IEnrolledQuizRepo from '../enrolled_quizzes/i-enrolled-quizzes.repository
 import { EnrolledSubQuizType } from '../enrolled_sub_quizzes/enrolled-sub-quizzes.domain'
 import IEnrolledSubQuizRepo from '../enrolled_sub_quizzes/i-enrolled-quizzes.repository'
 import IEnrolledSubQuizEvents from '../enrolled_sub_quizzes/i-enrolled-sub-quizzes.events'
-import IMultipleChoiceQuestionRepo from '../multiple_choice_questions/i-multiple-choice-questions.repository'
 import IQuizRepo from '../quizzes/i-quizzes.repository'
 import { SubQuizTypes } from '../sub_quizzes/sub-quizzes.domain'
-import EnrolledMultipleChoiceQuestion from './enrolled-multiple-choice-questions.domain'
-import EnrolledMultipleChoiceQuestionDTO from './enrolled-multiple-choice-questions.dto'
-import IEnrolledMultipleChoiceQuestionRepo from './i-enrolled-multiple-choice-questions.repository'
-import IEnrolledMultipleChoiceQuestionService, {
+import IUniqueChoiceQuestionRepo from '../unique_choice_questions/i-unique-choice-questions.repository'
+import EnrolledUniqueChoiceQuestion from './enrolled-unique-choice-questions.domain'
+import EnrolledUniqueChoiceQuestionDTO from './enrolled-unique-choice-questions.dto'
+import IEnrolledUniqueChoiceQuestionRepo from './i-enrolled-unique-choice-questions.repository'
+import IEnrolledUniqueChoiceQuestionService, {
   CompleteSubQuizArgs,
   CompleteSubQuizResult,
   GetEnrolledSubQuizArgs,
   GetEnrolledSubQuizResult,
   StartSubQuizArgs,
   StartSubQuizResult,
-} from './i-enrolled-multiple-choice-questions.services'
+} from './i-enrolled-unique-choice-questions.services'
 
 @Injectable()
-export default class EnrolledMultipleChoiceQuestionService
-  implements IEnrolledMultipleChoiceQuestionService
+export default class EnrolledUniqueChoiceQuestionService
+  implements IEnrolledUniqueChoiceQuestionService
 {
   constructor(
     @Inject(Repos.quiz) private quizRepo: IQuizRepo,
     @Inject(Repos.enrolledQuiz) private enrolledQuizRepo: IEnrolledQuizRepo,
-    @Inject(Repos.multipleChoiceQuestion)
-    private multipleChoiceQuestionRepo: IMultipleChoiceQuestionRepo,
-    @Inject(Repos.enrolledMultipleChoiceQuestion)
-    private enrolledMultipleChoiceQuestionRepo: IEnrolledMultipleChoiceQuestionRepo,
+    @Inject(Repos.uniqueChoiceQuestion)
+    private uniqueChoiceQuestionRepo: IUniqueChoiceQuestionRepo,
+    @Inject(Repos.enrolledUniqueChoiceQuestion)
+    private enrolledUniqueChoiceQuestionRepo: IEnrolledUniqueChoiceQuestionRepo,
     @Inject(Repos.enrolledSubQuiz) private enrolledSubQuizRepo: IEnrolledSubQuizRepo,
-    @Inject(Mappers.enrolledMultipleChoiceQuestion)
-    private enrolledMultipleChoiceQuestionMapper: IMapper<
-      EnrolledMultipleChoiceQuestion,
-      EnrolledMultipleChoiceQuestionDTO
+    @Inject(Mappers.enrolledUniqueChoiceQuestion)
+    private enrolledUniqueChoiceQuestionMapper: IMapper<
+      EnrolledUniqueChoiceQuestion,
+      EnrolledUniqueChoiceQuestionDTO
     >,
     @Inject(Events.enrolledSubQuiz) private enrolledSubQuizEvents: IEnrolledSubQuizEvents,
   ) {}
@@ -68,47 +67,47 @@ export default class EnrolledMultipleChoiceQuestionService
         message: 'quiz not started',
       })
 
-    const existingMultipleChoiceQuestion =
-      await this.multipleChoiceQuestionRepo.getMultipleChoiceQuestion(args.subQuizId)
+    const existingUniqueChoiceQuestion =
+      await this.uniqueChoiceQuestionRepo.getUniqueChoiceQuestion(args.subQuizId)
 
-    if (!existingMultipleChoiceQuestion)
+    if (!existingUniqueChoiceQuestion)
       return Left.create({
         code: 'sub_quiz_not_found',
         status: HttpStatus.NOT_FOUND,
-        message: 'multiple choice question sub quiz not found',
+        message: 'unique choice question sub quiz not found',
       })
 
-    if (existingMultipleChoiceQuestion.quizId !== args.quizId)
+    if (existingUniqueChoiceQuestion.quizId !== args.quizId)
       return Left.create({
         code: 'invalid_sub_quiz',
         status: HttpStatus.BAD_REQUEST,
         message: 'sub quiz not part of target quiz',
       })
 
-    const existingEnrolledMultipleChoiceQuestion =
-      await this.enrolledMultipleChoiceQuestionRepo.getEnrolledMultipleChoiceQuestion(
+    const existingEnrolledUniqueChoiceQuestion =
+      await this.enrolledUniqueChoiceQuestionRepo.getEnrolledUniqueChoiceQuestion(
         args.userId,
         args.quizId,
         args.subQuizId,
       )
 
-    if (existingEnrolledMultipleChoiceQuestion)
+    if (existingEnrolledUniqueChoiceQuestion)
       return Left.create({
         code: 'sub_quiz_already_started',
         status: HttpStatus.BAD_REQUEST,
         message: 'sub quiz already started',
       })
 
-    const existingEnrolledPreviousMultipleChoiceQuestion =
+    const existingEnrolledPreviousUniqueChoiceQuestion =
       await this.enrolledSubQuizRepo.getEnrolledSubQuizMetadata(
         args.userId,
         args.quizId,
-        existingMultipleChoiceQuestion.prevSubQuizId ?? '',
+        existingUniqueChoiceQuestion.prevSubQuizId ?? '',
       )
 
     if (
-      !existingEnrolledPreviousMultipleChoiceQuestion ||
-      existingEnrolledPreviousMultipleChoiceQuestion.isCompleted
+      !existingEnrolledPreviousUniqueChoiceQuestion ||
+      existingEnrolledPreviousUniqueChoiceQuestion.isCompleted
     )
       return Left.create({
         code: 'previous_sub_quiz_not_completed',
@@ -117,22 +116,22 @@ export default class EnrolledMultipleChoiceQuestionService
       })
 
     const startedSubQuiz =
-      await this.enrolledMultipleChoiceQuestionRepo.saveEnrolledMultipleChoiceQuestion({
+      await this.enrolledUniqueChoiceQuestionRepo.saveEnrolledUniqueChoiceQuestion({
         ...args,
         subQuizId: generateId(),
         isCompleted: false,
-        enrolledSubQuizType: EnrolledSubQuizType.enrolledMultipleChoiceQuestion,
+        enrolledSubQuizType: EnrolledSubQuizType.enrolledUniqueChoiceQuestion,
         answerCorrectness: false,
-        subQuizType: SubQuizTypes.multipleChoiceQuestion,
+        subQuizType: SubQuizTypes.uniqueChoiceQuestion,
         points: 0,
         completionTime: 0,
         createdAt: new Date(),
-        userAnswer: [],
+        userAnswer: -1,
       })
 
-    const mappedStartedSubQuiz = this.enrolledMultipleChoiceQuestionMapper.toDTO({
+    const mappedStartedSubQuiz = this.enrolledUniqueChoiceQuestionMapper.toDTO({
       ...startedSubQuiz,
-      subQuizId: existingMultipleChoiceQuestion,
+      subQuizId: existingUniqueChoiceQuestion,
     })
 
     return Right.create(mappedStartedSubQuiz)
@@ -154,24 +153,24 @@ export default class EnrolledMultipleChoiceQuestionService
         message: 'quiz not available',
       })
 
-    const existingMultipleChoiceQuestion =
-      await this.multipleChoiceQuestionRepo.getMultipleChoiceQuestion(args.subQuizId)
+    const existingUniqueChoiceQuestion =
+      await this.uniqueChoiceQuestionRepo.getUniqueChoiceQuestion(args.subQuizId)
 
-    if (!existingMultipleChoiceQuestion)
+    if (!existingUniqueChoiceQuestion)
       return Left.create({
         code: 'sub_quiz_not_found',
         status: HttpStatus.NOT_FOUND,
-        message: 'multiple choice question sub quiz not found',
+        message: 'unique choice question sub quiz not found',
       })
 
-    const existingEnrolledMultipleChoiceQuestion =
-      await this.enrolledMultipleChoiceQuestionRepo.getEnrolledMultipleChoiceQuestion(
+    const existingEnrolledUniqueChoiceQuestion =
+      await this.enrolledUniqueChoiceQuestionRepo.getEnrolledUniqueChoiceQuestion(
         args.userId,
         args.quizId,
         args.subQuizId,
       )
 
-    if (!existingEnrolledMultipleChoiceQuestion)
+    if (!existingEnrolledUniqueChoiceQuestion)
       return Left.create({
         code: 'sub_quiz_not_started',
         status: HttpStatus.BAD_REQUEST,
@@ -179,20 +178,16 @@ export default class EnrolledMultipleChoiceQuestionService
       })
 
     const completionTime =
-      (moment(existingEnrolledMultipleChoiceQuestion.createdAt).valueOf() - moment().valueOf()) /
-      1000
+      (moment(existingEnrolledUniqueChoiceQuestion.createdAt).valueOf() - moment().valueOf()) / 1000
 
     const isUserAnswerCorrect =
-      _.isEqual(
-        _.sortedUniq(args.userAnswer),
-        _.sortedUniq(existingMultipleChoiceQuestion.idealOptions),
-      ) && completionTime > -1
+      args.userAnswer === existingUniqueChoiceQuestion.idealOption && completionTime > -1
 
-    const reward = isUserAnswerCorrect ? existingMultipleChoiceQuestion.points : 0
+    const reward = isUserAnswerCorrect ? existingUniqueChoiceQuestion.points : 0
 
-    await this.enrolledMultipleChoiceQuestionRepo.saveEnrolledMultipleChoiceQuestion({
+    await this.enrolledUniqueChoiceQuestionRepo.saveEnrolledUniqueChoiceQuestion({
       ...args,
-      ...existingEnrolledMultipleChoiceQuestion,
+      ...existingEnrolledUniqueChoiceQuestion,
       points: reward,
       isCompleted: true,
       answerCorrectness: isUserAnswerCorrect,
@@ -207,7 +202,7 @@ export default class EnrolledMultipleChoiceQuestionService
         : {
             answerCorrectness: false,
             userAnswer: args.userAnswer,
-            expectedAnswer: existingMultipleChoiceQuestion.idealOptions,
+            expectedAnswer: existingUniqueChoiceQuestion.idealOption,
             points: reward,
             completionTime,
           },
@@ -230,33 +225,33 @@ export default class EnrolledMultipleChoiceQuestionService
         message: 'quiz not available',
       })
 
-    const existingMultipleChoiceQuestion =
-      await this.multipleChoiceQuestionRepo.getMultipleChoiceQuestion(args.subQuizId)
+    const existingUniqueChoiceQuestion =
+      await this.uniqueChoiceQuestionRepo.getUniqueChoiceQuestion(args.subQuizId)
 
-    if (!existingMultipleChoiceQuestion)
+    if (!existingUniqueChoiceQuestion)
       return Left.create({
         code: 'sub_quiz_not_found',
         status: HttpStatus.NOT_FOUND,
-        message: 'multiple choice question sub quiz not found',
+        message: 'unique choice question sub quiz not found',
       })
 
-    const existingEnrolledMultipleChoiceQuestion =
-      await this.enrolledMultipleChoiceQuestionRepo.getEnrolledMultipleChoiceQuestion(
+    const existingEnrolledUniqueChoiceQuestion =
+      await this.enrolledUniqueChoiceQuestionRepo.getEnrolledUniqueChoiceQuestion(
         args.userId,
         args.quizId,
         args.subQuizId,
       )
 
-    if (!existingEnrolledMultipleChoiceQuestion)
+    if (!existingEnrolledUniqueChoiceQuestion)
       return Left.create({
         code: 'sub_quiz_not_started',
         status: HttpStatus.BAD_REQUEST,
         message: 'sub quiz not started',
       })
 
-    const mappedEnrolledSubQuiz = this.enrolledMultipleChoiceQuestionMapper.toDTO({
-      ...existingEnrolledMultipleChoiceQuestion,
-      subQuizId: existingMultipleChoiceQuestion,
+    const mappedEnrolledSubQuiz = this.enrolledUniqueChoiceQuestionMapper.toDTO({
+      ...existingEnrolledUniqueChoiceQuestion,
+      subQuizId: existingUniqueChoiceQuestion,
     })
 
     return Right.create(mappedEnrolledSubQuiz)

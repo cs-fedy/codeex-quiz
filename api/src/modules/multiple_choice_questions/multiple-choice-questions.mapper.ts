@@ -19,8 +19,8 @@ export default class MultipleChoiceQuestionMapper
       raw.timeLimit,
       raw.dificulity,
       raw.coverImageURL,
-      raw.prevSubQuiz,
-      raw.nextSubQuiz,
+      raw.prevSubQuizId,
+      raw.nextSubQuizId,
     )
   }
 
@@ -36,8 +36,8 @@ export default class MultipleChoiceQuestionMapper
       timeLimit: domain.timeLimit,
       dificulity: domain.dificulity,
       coverImageURL: domain.coverImageURL,
-      prevSubQuiz: domain.prevSubQuiz,
-      nextSubQuiz: domain.nextSubQuiz,
+      prevSubQuizId: domain.prevSubQuizId,
+      nextSubQuizId: domain.nextSubQuizId,
     }
   }
 
@@ -53,8 +53,8 @@ export default class MultipleChoiceQuestionMapper
       domain.timeLimit,
       domain.dificulity,
       domain.coverImageURL,
-      domain.prevSubQuiz,
-      domain.nextSubQuiz,
+      domain.prevSubQuizId,
+      domain.nextSubQuizId,
     )
   }
 }

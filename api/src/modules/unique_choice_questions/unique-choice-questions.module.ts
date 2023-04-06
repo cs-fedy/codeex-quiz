@@ -25,6 +25,7 @@ const uniqueChoiceQuestionModel = MongooseModule.forFeature([
     { provide: Repos.uniqueChoiceQuestion, useClass: UniqueChoiceQuestionRepo },
     { provide: Services.uniqueChoiceQuestion, useClass: UniqueChoiceQuestionService },
   ],
+  exports: [{ provide: Repos.uniqueChoiceQuestion, useClass: UniqueChoiceQuestionRepo }],
 })
 export default class UniqueChoiceQuestionsModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {

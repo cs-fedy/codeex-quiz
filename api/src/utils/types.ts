@@ -89,3 +89,27 @@ export type QuizNotEnrolled = {
   status: HttpStatus.BAD_REQUEST
   message: string
 }
+
+export type InvalidSubQuiz = {
+  code: 'invalid_sub_quiz'
+  status: HttpStatus.BAD_REQUEST
+  message: string
+}
+
+export type PreviousSubQuizNotCompleted = {
+  code: 'previous_sub_quiz_not_completed'
+  status: HttpStatus.FORBIDDEN
+  message: string
+}
+
+export type SubQuizAlreadyStarted = {
+  code: 'sub_quiz_already_started'
+  status: HttpStatus.BAD_REQUEST
+  message: string
+}
+
+export type SubQuizNotStarted = {
+  code: 'sub_quiz_not_started'
+  status: HttpStatus.BAD_REQUEST
+  message: string
+}

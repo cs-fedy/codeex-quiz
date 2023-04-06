@@ -13,7 +13,7 @@ export default class MultipleChoiceQuestionDTO implements SubQuizDTO {
     public timeLimit: number,
     public dificulity: number,
     public coverImageURL?: string,
-    public prevSubQuiz?: string,
-    public nextSubQuiz?: string,
+    public prevSubQuizId?: string,
+    public nextSubQuizId?: string,
   ) {}
 }
