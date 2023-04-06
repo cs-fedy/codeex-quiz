@@ -34,6 +34,7 @@ export enum Mappers {
   enrolledSubQuiz = 'enrolled_sub_quiz_mapper',
   enrolledMultipleChoiceQuestion = 'enrolled_multiple_choice_question_mapper',
   enrolledUniqueChoiceQuestion = 'enrolled_unique_choice_question_mapper',
+  enrolledTrueFalseQuestion = 'enrolled_true_false_question_mapper',
 }
 
 export enum Repos {
@@ -85,6 +86,7 @@ export enum Services {
   enrolledSubQuiz = 'enrolled_sub_quiz_service',
   enrolledMultipleChoiceQuestion = 'enrolled_multiple_choice_question_service',
   enrolledUniqueChoiceQuestion = 'enrolled_unique_choice_question_service',
+  enrolledTrueFalseQuestion = 'enrolled_true_false_question_services',
 }
 
 export enum Roles {

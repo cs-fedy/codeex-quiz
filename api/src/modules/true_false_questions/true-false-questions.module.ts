@@ -25,6 +25,7 @@ const trueFalseQuestionModel = MongooseModule.forFeature([
     { provide: Repos.trueFalseQuestion, useClass: TrueFalseQuestionRepo },
     { provide: Services.trueFalseQuestion, useClass: TrueFalseQuestionService },
   ],
+  exports: [{ provide: Repos.trueFalseQuestion, useClass: TrueFalseQuestionRepo }],
 })
 export default class TrueFalseQuestionsModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
