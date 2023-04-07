@@ -113,3 +113,9 @@ export type SubQuizNotStarted = {
   status: HttpStatus.BAD_REQUEST
   message: string
 }
+
+export type TopicNotFound = {
+  code: 'topic_not_found'
+  status: HttpStatus.NOT_FOUND
+  message: string
+}

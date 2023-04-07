@@ -16,6 +16,7 @@ export enum Models {
   enrolledUniqueChoiceQuestions = 'enrolled_unique_choice_questions',
   enrolledTrueFalseQuestions = 'enrolled_true_false_questions',
   enrolledSubQuizzes = 'enrolled_sub_quizzes',
+  topics = 'topics',
 }
 
 export enum Mappers {
@@ -35,6 +36,7 @@ export enum Mappers {
   enrolledMultipleChoiceQuestion = 'enrolled_multiple_choice_question_mapper',
   enrolledUniqueChoiceQuestion = 'enrolled_unique_choice_question_mapper',
   enrolledTrueFalseQuestion = 'enrolled_true_false_question_mapper',
+  topic = 'topic_mapper',
 }
 
 export enum Repos {
@@ -57,6 +59,7 @@ export enum Repos {
   enrolledMultipleChoiceQuestion = 'enrolled_multiple_choice_question_repo',
   enrolledUniqueChoiceQuestion = 'enrolled_unique_choice_question_repo',
   enrolledTrueFalseQuestion = 'enrolled_true_false_question_repo',
+  topic = 'topic_repo',
 }
 
 export enum Services {
@@ -86,7 +89,8 @@ export enum Services {
   enrolledSubQuiz = 'enrolled_sub_quiz_service',
   enrolledMultipleChoiceQuestion = 'enrolled_multiple_choice_question_service',
   enrolledUniqueChoiceQuestion = 'enrolled_unique_choice_question_service',
-  enrolledTrueFalseQuestion = 'enrolled_true_false_question_services',
+  enrolledTrueFalseQuestion = 'enrolled_true_false_question_service',
+  topic = 'topic_service',
 }
 
 export enum Roles {
@@ -135,6 +139,7 @@ export enum Routes {
   enrolledSubQuizzes = 'enrolled_sub_quizzes',
   start = 'start',
   complete = 'complete',
+  topics = 'topics',
 }
 
 export enum Jobs {

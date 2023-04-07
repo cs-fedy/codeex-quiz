@@ -11,7 +11,7 @@ import CollectionsModule from './collections/collections.module'
 import EnrolledMultipleChoiceQuestionsModule from './enrolled_multiple_choice_questions/enrolled-multiple-choice-questions.module'
 import EnrolledQuizzesModule from './enrolled_quizzes/enrolled-quizzes.module'
 import EnrolledSubQuizzesModule from './enrolled_sub_quizzes/enrolled-sub-quizzes.module'
-import EnrolledTrueFalseQuestionsModule from './enrolled_true_false_questions copy/enrolled-true-false-questions.module'
+import EnrolledTrueFalseQuestionsModule from './enrolled_true_false_questions/enrolled-true-false-questions.module'
 import EnrolledUniqueChoiceQuestionsModule from './enrolled_unique_choice_questions/enrolled-unique-choice-questions.module'
 import MultipleChoiceQuestionsModule from './multiple_choice_questions/multiple-choice-questions.module'
 import NotificationsModule from './notifications/notifications.module'
@@ -20,6 +20,7 @@ import QuizzesApprovalModule from './quiz_approval/quiz-approval.module'
 import QuizzesModule from './quizzes/quizzes.module'
 import ResetPasswordModule from './reset_password/reset-password.module'
 import SubQuizzesModule from './sub_quizzes/sub-quizzes.module'
+import TopicsModule from './topics/topics.module'
 import TrueFalseQuestionsModule from './true_false_questions/true-false-questions.module'
 import UniqueChoiceQuestionsModule from './unique_choice_questions/unique-choice-questions.module'
 import UsersModule from './users/users.module'
@@ -62,6 +63,7 @@ const bullConnection = BullModule.forRoot({
     EnrolledMultipleChoiceQuestionsModule,
     EnrolledUniqueChoiceQuestionsModule,
     EnrolledTrueFalseQuestionsModule,
+    TopicsModule,
   ],
 })
 export default class AppModule {}
