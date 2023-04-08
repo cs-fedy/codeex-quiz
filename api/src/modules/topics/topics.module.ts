@@ -21,6 +21,7 @@ const topicModel = MongooseModule.forFeature([{ name: Models.topics, schema: Top
     { provide: Repos.topic, useClass: TopicRepo },
     { provide: Services.topic, useClass: TopicService },
   ],
+  exports: [{ provide: Repos.topic, useClass: TopicRepo }],
 })
 export default class TopicsModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
