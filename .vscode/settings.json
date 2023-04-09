@@ -9,6 +9,7 @@
     "codeex",
     "dificulity",
     "dtos",
+    "Leaderboard",
     "lpos",
     "lpush",
     "lrange",

@@ -2,6 +2,7 @@ import { BullModule } from '@nestjs/bull'
 import { Module } from '@nestjs/common'
 import { ConfigModule } from '@nestjs/config'
 import { MongooseModule } from '@nestjs/mongoose'
+import { ScheduleModule } from '@nestjs/schedule'
 import AccountsModule from './account/accounts.module'
 import AdminModule from './admin/admin.module'
 import AuthModule from './auth/auth.module'
@@ -13,6 +14,7 @@ import EnrolledQuizzesModule from './enrolled_quizzes/enrolled-quizzes.module'
 import EnrolledSubQuizzesModule from './enrolled_sub_quizzes/enrolled-sub-quizzes.module'
 import EnrolledTrueFalseQuestionsModule from './enrolled_true_false_questions/enrolled-true-false-questions.module'
 import EnrolledUniqueChoiceQuestionsModule from './enrolled_unique_choice_questions/enrolled-unique-choice-questions.module'
+import LeaderboardModule from './leaderboard/leaderboard.module'
 import MultipleChoiceQuestionsModule from './multiple_choice_questions/multiple-choice-questions.module'
 import NotificationsModule from './notifications/notifications.module'
 import ProfilesModule from './profiles/profiles.module'
@@ -38,9 +40,12 @@ const bullConnection = BullModule.forRoot({
   },
 })
 
+const schedule = ScheduleModule.forRoot()
+
 @Module({
   imports: [
     config,
+    schedule,
     bullConnection,
     mongoConnection,
     AuthModule,
@@ -66,6 +71,7 @@ const bullConnection = BullModule.forRoot({
     EnrolledTrueFalseQuestionsModule,
     TopicsModule,
     TopicQuizzesModule,
+    LeaderboardModule,
   ],
 })
 export default class AppModule {}

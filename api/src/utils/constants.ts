@@ -18,6 +18,7 @@ export enum Models {
   enrolledSubQuizzes = 'enrolled_sub_quizzes',
   topics = 'topics',
   topicQuizzes = 'topic_quizzes',
+  leaderboard = 'leaderboard',
 }
 
 export enum Mappers {
@@ -38,7 +39,8 @@ export enum Mappers {
   enrolledUniqueChoiceQuestion = 'enrolled_unique_choice_question_mapper',
   enrolledTrueFalseQuestion = 'enrolled_true_false_question_mapper',
   topic = 'topic_mapper',
-  topicQuiz = 'topic_quiz',
+  topicQuiz = 'topic_quiz_mapper',
+  leaderboard = 'leaderboard_mapper',
 }
 
 export enum Repos {
@@ -63,6 +65,7 @@ export enum Repos {
   enrolledTrueFalseQuestion = 'enrolled_true_false_question_repo',
   topic = 'topic_repo',
   topicQuiz = 'topic_quiz_repo',
+  leaderboard = 'leaderboard_repo',
 }
 
 export enum Services {
@@ -95,6 +98,7 @@ export enum Services {
   enrolledTrueFalseQuestion = 'enrolled_true_false_question_service',
   topic = 'topic_service',
   topicQuiz = 'topic_quiz_service',
+  leaderboard = 'leaderboard_service',
 }
 
 export enum Roles {
@@ -145,6 +149,7 @@ export enum Routes {
   complete = 'complete',
   topics = 'topics',
   topicQuizzes = 'topic_quizzes',
+  leaderboard = 'leaderboard',
 }
 
 export enum Jobs {

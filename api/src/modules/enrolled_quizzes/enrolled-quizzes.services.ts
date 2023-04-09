@@ -58,7 +58,7 @@ export default class EnrolledQuizService implements IEnrolledQuizService {
   }
 
   async listEnrolledQuizzes(userId: string): Promise<ListEnrolledQuizzesResult> {
-    const quizzes = await this.enrolledQuizRepo.listEnrolledQuizzes(userId)
+    const quizzes = await this.enrolledQuizRepo.listEnrolledQuizzesByUserId(userId)
     const mappedQuizzes = quizzes.map(this.enrolledQuizMapper.toDTO)
     return Right.create(mappedQuizzes)
   }
