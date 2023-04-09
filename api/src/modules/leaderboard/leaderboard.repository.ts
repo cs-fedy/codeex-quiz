@@ -33,4 +33,11 @@ export default class LeaderboardRepo implements ILeaderboardRepo {
     const mappedList = leaderboardList.map(this.leaderboardMapper.toDomain)
     return mappedList
   }
+
+  async listQuizLeaderboard(quizId: string): Promise<Array<Leaderboard>> {
+    const latestVersion = await this.getRecentVersion()
+    const leaderboardList = await this.leaderboardModel.find({ quizId, version: latestVersion })
+    const mappedList = leaderboardList.map(this.leaderboardMapper.toDomain)
+    return mappedList
+  }
 }

@@ -5,6 +5,7 @@ import { LoggedMiddleware } from 'src/middleware/logged'
 import { Mappers, Models, Repos, Services } from 'src/utils/constants'
 import AccessModule from '../access/access.module'
 import EnrolledQuizzesModule from '../enrolled_quizzes/enrolled-quizzes.module'
+import QuizzesModule from '../quizzes/quizzes.module'
 import UsersModule from '../users/users.module'
 import LeaderboardController from './leaderboard.controller'
 import LeaderboardCronScheduler from './leaderboard.cron'
@@ -18,7 +19,7 @@ const leaderboardModel = MongooseModule.forFeature([
 ])
 
 @Module({
-  imports: [leaderboardModel, AccessModule, UsersModule, EnrolledQuizzesModule],
+  imports: [leaderboardModel, AccessModule, UsersModule, QuizzesModule, EnrolledQuizzesModule],
   controllers: [LeaderboardController],
   providers: [
     LeaderboardCronScheduler,

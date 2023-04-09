@@ -6,6 +6,8 @@ import IEnrolledQuizRepo from '../enrolled_quizzes/i-enrolled-quizzes.repository
 import ILeaderboardRepo from './i-leaderboard.repository'
 import Leaderboard from './leaderboard.domain'
 
+type PointsPerUser = Record<string, { points: number; quizId: string }>
+
 @Injectable()
 export default class LeaderboardCronScheduler {
   constructor(
@@ -18,13 +20,13 @@ export default class LeaderboardCronScheduler {
     const leaderboardList = await this.enrolledQuizRepo.listEnrolledQuizzes()
 
     const pointsPerUser = leaderboardList.reduce(
-      (prev: Record<string, number>, curr: EnrolledQuiz) => ({
+      (prev: PointsPerUser, curr: EnrolledQuiz) => ({
         ...prev,
         [curr.userId]: Object.keys(prev).includes(curr.userId)
-          ? prev[curr.userId] + curr.points
-          : curr.points,
+          ? { points: prev[curr.userId].points + curr.points, quizId: curr.quizId }
+          : { points: curr.points, quizId: curr.quizId },
       }),
-      {} as Record<string, number>,
+      {} as PointsPerUser,
     )
 
     const latestVersion = await this.leaderboardRepo.getRecentVersion()
@@ -32,7 +34,8 @@ export default class LeaderboardCronScheduler {
     const newestVersionDate = new Date()
 
     const formattedData = Object.entries(pointsPerUser).map(
-      ([userId, points]) => new Leaderboard(newestVersion, userId, points, newestVersionDate),
+      ([userId, stats]) =>
+        new Leaderboard(newestVersion, userId, stats.quizId, stats.points, newestVersionDate),
     )
 
     await this.leaderboardRepo.addLeaderboard(formattedData)

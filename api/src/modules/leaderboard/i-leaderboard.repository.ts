@@ -4,4 +4,5 @@ export default interface ILeaderboardRepo {
   getRecentVersion(): Promise<number>
   addLeaderboard(args: Array<Leaderboard>): Promise<Array<Leaderboard>>
   listRecentLeaderboard(): Promise<Array<Leaderboard>>
+  listQuizLeaderboard(quizId: string): Promise<Array<Leaderboard>>
 }

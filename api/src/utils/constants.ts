@@ -150,6 +150,7 @@ export enum Routes {
   topics = 'topics',
   topicQuizzes = 'topic_quizzes',
   leaderboard = 'leaderboard',
+  global = 'global',
 }
 
 export enum Jobs {

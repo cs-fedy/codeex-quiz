@@ -6,13 +6,14 @@ import LeaderboardDTO from './leaderboard.dto'
 @Injectable()
 export default class LeaderboardMapper implements IMapper<Leaderboard, LeaderboardDTO> {
   toDomain(raw: any): Leaderboard {
-    return new Leaderboard(raw.version, raw.userId, raw.points, raw.createdAt)
+    return new Leaderboard(raw.version, raw.userId, raw.quizId, raw.points, raw.createdAt)
   }
 
   toPersistence(domain: Leaderboard) {
     return {
       version: domain.version,
       userId: domain.userId,
+      quizId: domain.quizId,
       points: domain.points,
       createdAt: domain.createdAt,
     }
