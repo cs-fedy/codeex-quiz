@@ -17,6 +17,11 @@ export default class LeaderboardService implements ILeaderboardService {
   async getGlobalLeaderboard(): Promise<GetGlobalLeaderboardResult> {
     const recentLeaderboard = await this.leaderboardRepo.listRecentLeaderboard()
     const mappedLeaderboard = recentLeaderboard.map(this.leaderboardMapper.toDTO)
-    return Right.create(mappedLeaderboard)
+
+    const sortedLeaderboardList = mappedLeaderboard.sort(
+      (currentLeaderboard, nextLeaderboard) => currentLeaderboard.points - nextLeaderboard.points,
+    )
+
+    return Right.create(sortedLeaderboardList)
   }
 }
