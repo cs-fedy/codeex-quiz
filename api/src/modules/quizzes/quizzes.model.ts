@@ -4,6 +4,7 @@ import { Models } from 'src/utils/constants'
 import { User } from '../users/users.model'
 
 export type QuizDocument = HydratedDocument<Quiz>
+// TODO: control the max point of a quiz
 
 @Schema()
 export class Quiz extends Document {

@@ -19,6 +19,7 @@ export default class LeaderboardCronScheduler {
   async generateLeaderboard() {
     const leaderboardList = await this.enrolledQuizRepo.listEnrolledQuizzes()
 
+    // TODO: only completed quiz
     const pointsPerUser = leaderboardList.reduce(
       (prev: PointsPerUser, curr: EnrolledQuiz) => ({
         ...prev,
